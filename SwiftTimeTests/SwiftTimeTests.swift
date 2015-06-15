@@ -8,6 +8,8 @@
 
 import XCTest
 
+import SwiftTime
+
 class SwiftTimeTests: XCTestCase {
     
     override func setUp() {
@@ -20,16 +22,25 @@ class SwiftTimeTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPlusSecondsOperator() {
+        let d1 = Instant(seconds: 123)
+        let d2 = d1 + 123.seconds()
+        
+        assert(d2.seconds == 246)
+        assert(d2.nanos == 0)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
+    func testEquals() {
+        let d1 = Instant(seconds: 123)
+        let d2 = Instant(seconds: 123)
+        
+        assert(d1 == d2)
     }
     
+    func testNotEquals() {
+        let d1 = Instant(seconds: 123)
+        let d2 = Instant(seconds: 234)
+        
+        assert(d1 != d2)
+    }
 }

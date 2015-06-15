@@ -10,6 +10,15 @@
 		16381BCE1B2F67C300882BEF /* SwiftTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 16381BCD1B2F67C300882BEF /* SwiftTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		16381BD51B2F67C300882BEF /* SwiftTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16381BCA1B2F67C300882BEF /* SwiftTime.framework */; };
 		16381BDA1B2F67C300882BEF /* SwiftTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BD91B2F67C300882BEF /* SwiftTimeTests.swift */; };
+		16381BED1B2F681900882BEF /* Instant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE41B2F681900882BEF /* Instant.swift */; };
+		16381BEE1B2F681900882BEF /* Temporal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE51B2F681900882BEF /* Temporal.swift */; };
+		16381BEF1B2F681900882BEF /* Amounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE61B2F681900882BEF /* Amounts.swift */; };
+		16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */; };
+		16381BF11B2F681900882BEF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE81B2F681900882BEF /* Units.swift */; };
+		16381BF21B2F681900882BEF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE91B2F681900882BEF /* Errors.swift */; };
+		16381BF31B2F681900882BEF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEA1B2F681900882BEF /* Utils.swift */; };
+		16381BF41B2F681900882BEF /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEB1B2F681900882BEF /* DateTime.swift */; };
+		16381BF51B2F681900882BEF /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEC1B2F681900882BEF /* Zone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +38,15 @@
 		16381BD41B2F67C300882BEF /* SwiftTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16381BD91B2F67C300882BEF /* SwiftTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTimeTests.swift; sourceTree = "<group>"; };
 		16381BDB1B2F67C300882BEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16381BE41B2F681900882BEF /* Instant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instant.swift; sourceTree = "<group>"; };
+		16381BE51B2F681900882BEF /* Temporal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temporal.swift; sourceTree = "<group>"; };
+		16381BE61B2F681900882BEF /* Amounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Amounts.swift; sourceTree = "<group>"; };
+		16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericTimeExtensions.swift; sourceTree = "<group>"; };
+		16381BE81B2F681900882BEF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
+		16381BE91B2F681900882BEF /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		16381BEA1B2F681900882BEF /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		16381BEB1B2F681900882BEF /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
+		16381BEC1B2F681900882BEF /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +91,15 @@
 			children = (
 				16381BCD1B2F67C300882BEF /* SwiftTime.h */,
 				16381BCF1B2F67C300882BEF /* Info.plist */,
+				16381BE51B2F681900882BEF /* Temporal.swift */,
+				16381BE41B2F681900882BEF /* Instant.swift */,
+				16381BEB1B2F681900882BEF /* DateTime.swift */,
+				16381BE61B2F681900882BEF /* Amounts.swift */,
+				16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */,
+				16381BE81B2F681900882BEF /* Units.swift */,
+				16381BE91B2F681900882BEF /* Errors.swift */,
+				16381BEA1B2F681900882BEF /* Utils.swift */,
+				16381BEC1B2F681900882BEF /* Zone.swift */,
 			);
 			path = SwiftTime;
 			sourceTree = "<group>";
@@ -142,6 +169,7 @@
 		16381BC11B2F67C300882BEF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Sigurd Ljødal";
 				TargetAttributes = {
@@ -193,6 +221,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */,
+				16381BED1B2F681900882BEF /* Instant.swift in Sources */,
+				16381BEF1B2F681900882BEF /* Amounts.swift in Sources */,
+				16381BF31B2F681900882BEF /* Utils.swift in Sources */,
+				16381BF11B2F681900882BEF /* Units.swift in Sources */,
+				16381BF51B2F681900882BEF /* Zone.swift in Sources */,
+				16381BF21B2F681900882BEF /* Errors.swift in Sources */,
+				16381BF41B2F681900882BEF /* DateTime.swift in Sources */,
+				16381BEE1B2F681900882BEF /* Temporal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +339,7 @@
 		16381BDF1B2F67C300882BEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,12 +352,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ljodal.SwiftTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		16381BE01B2F67C300882BEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
