@@ -25,13 +25,13 @@ public protocol TemporalUnit {
 A unit representing an hour
 */
 public struct Hours : TemporalUnit, TemporalAmount {
-    
+
     public let count: Int64
-    
+
     public init(_ count: Int64) {
         self.count = count
     }
-    
+
     public func supports(field: TemporalUnit) -> Bool {
         switch field {
         case is Hours:
@@ -40,7 +40,7 @@ public struct Hours : TemporalUnit, TemporalAmount {
             return false
         }
     }
-    
+
     public func get(unit: TemporalUnit) throws -> Int64 {
         switch unit {
         case is Hours:
@@ -49,12 +49,12 @@ public struct Hours : TemporalUnit, TemporalAmount {
             throw DateTimeErrors.UnsupportedUnit
         }
     }
-    
+
     public static func addTo<T : Temporal>(temporal: T, amount: Int64) throws -> T {
         return temporal.add(amount.hours())
 
     }
-    
+
     public static func between<T : Temporal>(start: T, and: T) -> Int64 {
         return 0
     }
@@ -63,11 +63,36 @@ public struct Hours : TemporalUnit, TemporalAmount {
 /**
 A unit representing a minute
 */
-public struct Minutes : TemporalUnit {
+public struct Minutes : TemporalUnit, TemporalAmount {
+
+    public let count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is Minutes:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is Minutes:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
+
     public static func addTo<T : Temporal>(temporal: T, amount: Int64) throws -> T {
         return temporal.add(amount.minutes())
     }
-    
+
     public static func between<T : Temporal>(start: T, and: T) -> Int64 {
         return 0
     }
@@ -76,11 +101,36 @@ public struct Minutes : TemporalUnit {
 /**
 A unit representing a second
 */
-public struct Seconds : TemporalUnit {
+public struct Seconds : TemporalUnit, TemporalAmount {
+
+    public let count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is Seconds:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is Seconds:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
+
     public static func addTo<T : Temporal>(temporal: T, amount: Int64) throws -> T {
         return temporal.add(amount.seconds())
     }
-    
+
     public static func between<T : Temporal>(start: T, and: T) -> Int64 {
         return 0
     }
