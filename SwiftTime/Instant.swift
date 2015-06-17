@@ -25,8 +25,8 @@ public struct Instant : Temporal {
     }
     
     public init(millis: Int64) {
-        self.seconds = millis / 1000
-        self.nanos = Int32(millis % 1000) * 1000
+        self.seconds = millis / 1_000
+        self.nanos = Int32(millis % 1_000) * 1_000_000
     }
     
     public func add(unit: TemporalUnit, amount: Int64) -> Instant {
