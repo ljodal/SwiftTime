@@ -9,4 +9,5 @@
 public enum DateTimeErrors : ErrorType {
     case UnsupportedUnit
     case InvalidMonth
+    case UnsupportedAmount
 }

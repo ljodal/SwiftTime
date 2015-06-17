@@ -18,7 +18,6 @@ extension Temporal {
     }
 }
 
-
 public func +<T : Temporal> (lhs: T, rhs: TemporalAmount) -> T {
     return lhs.add(rhs)
 }

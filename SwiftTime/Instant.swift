@@ -35,9 +35,9 @@ public struct Instant : Temporal {
     
     public func add(amount: TemporalAmount) -> Instant {
         switch amount {
-        case is Duration:
-            let seconds = try! self.seconds + amount.get(Seconds())
-            let nanos = self.nanos
+        case let d as Duration:
+            let seconds = self.seconds + d.seconds
+            let nanos = self.nanos + d.nanoSeconds
             return Instant(seconds: seconds, nanos: nanos)
         default:
             return self
