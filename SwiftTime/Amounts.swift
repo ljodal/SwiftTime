@@ -21,7 +21,7 @@ public struct Duration : TemporalAmount {
     public let seconds: Int64
     public let nanoSeconds: Int64
     
-    init(seconds: Int64, nanoSeconds: Int64) {
+    public init(seconds: Int64, nanoSeconds: Int64) {
         self.seconds = seconds
         self.nanoSeconds = nanoSeconds
     }
@@ -48,7 +48,7 @@ public struct Period : TemporalAmount {
     public let months: Int64
     public let days: Int64
     
-    init(years: Int64, months: Int64, days: Int64) {
+    public init(years: Int64, months: Int64, days: Int64) {
         self.years = years
         self.months = months
         self.days = days
