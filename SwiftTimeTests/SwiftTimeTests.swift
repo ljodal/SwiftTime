@@ -24,7 +24,7 @@ class SwiftTimeTests: XCTestCase {
     
     func testPlusSecondsOperator() {
         let d1 = Instant(seconds: 123)
-        let d2 = d1 + 123.seconds()
+        let d2 = d1 + 123.seconds
         
         assert(d2.seconds == 246)
         assert(d2.nanos == 0)

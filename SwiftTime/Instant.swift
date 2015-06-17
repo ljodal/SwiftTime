@@ -39,6 +39,12 @@ public struct Instant : Temporal {
             let seconds = self.seconds + d.seconds
             let nanos = self.nanos + d.nanoSeconds
             return Instant(seconds: seconds, nanos: nanos)
+        case let s as Hours:
+            return Instant(seconds: seconds + s.seconds, nanos: nanos)
+        case let s as Minutes:
+            return Instant(seconds: seconds + s.seconds, nanos: nanos)
+        case let s as Seconds:
+            return Instant(seconds: seconds + s.seconds, nanos: nanos)
         default:
             return self
         }

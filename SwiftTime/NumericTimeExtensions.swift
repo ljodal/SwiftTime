@@ -7,71 +7,101 @@
 //
 
 extension Int {
-    public func hours() -> Duration {
-        return Duration(seconds: Int64(self) * 60 * 60, nanoSeconds: 0)
+    public var hours: Hours {
+        get {
+            return Hours(Int64(self))
+        }
     }
     
-    public func minutes() -> Duration {
-        return Duration(seconds: Int64(self) * 60, nanoSeconds: 0)
+    public var minutes: Minutes {
+        get {
+            return Minutes(Int64(self))
+        }
     }
     
-    public func seconds() -> Duration {
-        return Duration(seconds: Int64(self), nanoSeconds: 0)
+    public var seconds: Seconds {
+        get {
+            return Seconds(Int64(self))
+        }
     }
 }
 
 extension Int8 {
-    public func hours() -> Duration {
-        return Duration(seconds: Int64(self) * 86400, nanoSeconds: 0)
+    public var hours: Hours {
+        get {
+            return Hours(Int64(self))
+        }
     }
     
-    public func minutes() -> Duration {
-        return Duration(seconds: Int64(self) * 60, nanoSeconds: 0)
+    public var minutes: Minutes {
+        get {
+            return Minutes(Int64(self))
+        }
     }
-    
-    public func seconds() -> Duration {
-        return Duration(seconds: Int64(self), nanoSeconds: 0)
+
+    public var seconds: Seconds {
+        get {
+            return Seconds(Int64(self))
+        }
     }
 }
 
 extension Int16 {
-    public func hours() -> Duration {
-        return Duration(seconds: Int64(self) * 86400, nanoSeconds: 0)
+    public var hours: Hours {
+        get {
+            return Hours(Int64(self))
+        }
     }
     
-    public func minutes() -> Duration {
-        return Duration(seconds: Int64(self) * 60, nanoSeconds: 0)
+    public var minutes: Minutes {
+        get {
+            return Minutes(Int64(self))
+        }
     }
-    
-    public func seconds() -> Duration {
-        return Duration(seconds: Int64(self), nanoSeconds: 0)
+
+    public var seconds: Seconds {
+        get {
+            return Seconds(Int64(self))
+        }
     }
 }
 
 extension Int32 {
-    public func hours() -> Duration {
-        return Duration(seconds: Int64(self) * 86400, nanoSeconds: 0)
+    public var hours: Hours {
+        get {
+            return Hours(Int64(self))
+        }
     }
     
-    public func minutes() -> Duration {
-        return Duration(seconds: Int64(self) * 60, nanoSeconds: 0)
+    public var minutes: Minutes {
+        get {
+            return Minutes(Int64(self))
+        }
     }
-    
-    public func seconds() -> Duration {
-        return Duration(seconds: Int64(self), nanoSeconds: 0)
+
+    public var seconds: Seconds {
+        get {
+            return Seconds(Int64(self))
+        }
     }
 }
 
 extension Int64 {
-    public func hours() -> Duration {
-        return Duration(seconds: self * 86400, nanoSeconds: 0)
+    public var hours: Hours {
+        get {
+            return Hours(self)
+        }
     }
     
-    public func minutes() -> Duration {
-        return Duration(seconds: Int64(self) * 60, nanoSeconds: 0)
+    public var minutes: Minutes {
+        get {
+            return Minutes(self)
+        }
     }
-    
-    public func seconds() -> Duration {
-        return Duration(seconds: Int64(self), nanoSeconds: 0)
+
+    public var seconds: Seconds {
+        get {
+            return Seconds(self)
+        }
     }
 }
