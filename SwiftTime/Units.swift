@@ -27,7 +27,7 @@ public protocol TemporalUnit {
 ///
 public protocol CountableAmount : TemporalAmountMath, Equatable {
     /// The count that this time delta contains
-    var count: Int64 { get }
+    var count: Int64 { get set }
 
     /// Initialized that sets the count
     init(_ count: Int64)
@@ -69,6 +69,22 @@ public func /<T : CountableAmount>(lhs: T, rhs: Int) -> T {
     return lhs.divide(rhs)
 }
 
+public func +=<T : CountableAmount>(inout lhs: T, rhs: T) {
+    lhs.count += rhs.count
+}
+
+public func -=<T : CountableAmount>(inout lhs: T, rhs: T) {
+    lhs.count -= rhs.count
+}
+
+public func /=<T : CountableAmount>(inout lhs: T, divider: Int) {
+    lhs.count /= Int64(divider)
+}
+
+public func *=<T : CountableAmount>(inout lhs: T, factor: Int) {
+    lhs.count *= Int64(factor)
+}
+
 public extension CountableAmount {
     final func add(other: Self) -> Self {
         return Self(self.count + other.count)
@@ -107,7 +123,7 @@ A unit representing an hour
 */
 public struct Hours : SecondsRepresentableAmount {
 
-    public let count: Int64
+    public var count: Int64
 
     public init(_ count: Int64) {
         self.count = count
@@ -151,7 +167,7 @@ A unit representing a minute
 */
 public struct Minutes : SecondsRepresentableAmount {
 
-    public let count: Int64
+    public var count: Int64
 
     public init(_ count: Int64) {
         self.count = count
@@ -195,7 +211,7 @@ A unit representing a second
 */
 public struct Seconds : SecondsRepresentableAmount {
 
-    public let count: Int64
+    public var count: Int64
 
     public init(_ count: Int64) {
         self.count = count

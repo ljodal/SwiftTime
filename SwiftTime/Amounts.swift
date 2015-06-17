@@ -21,6 +21,10 @@ public protocol TemporalAmountMath : TemporalAmount {
     func subtract(other: Self) -> Self
     func multiply(factor: Int) -> Self
     func divide(divider: Int) -> Self
+    func +=(inout lhs: Self, rhs: Self)
+    func -=(inout lhs: Self, rhs: Self)
+    func /=(inout lhs: Self, divider: Int)
+    func *=(inout rhs: Self, factor: Int)
 }
 
 func +<T : TemporalAmountMath>(lhs: T, rhs: T) -> T {
