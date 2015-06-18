@@ -14,7 +14,7 @@ public struct DateTime : Temporal {
     let minutes: Int64
     let seconds: Int64
     let nanos: Int64
-    let zone: Zone
+    let zone: TimeZone
     
     public init(
         year: Int64 = 0,
@@ -24,7 +24,7 @@ public struct DateTime : Temporal {
         minutes: Int64 = 0,
         seconds: Int64 = 0,
         nanos: Int64 = 0,
-        zone: Zone = Zone.UTC)
+        zone: TimeZone = TZ.UTC)
     {
         self.year = year
         self.month = month
