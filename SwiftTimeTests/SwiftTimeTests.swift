@@ -43,4 +43,11 @@ class SwiftTimeTests: XCTestCase {
         
         assert(d1 != d2)
     }
+
+    func testAdd() {
+        var h1 = 1.hours
+        h1 += 2.hours
+
+        assert(h1 == 3.hours)
+    }
 }

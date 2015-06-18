@@ -115,7 +115,7 @@ public protocol SecondsRepresentableAmount : CountableAmount {
 /// A protocol for time amounts that can be representated as a number of nano seconds
 ///
 public protocol NanoSecondsRepresentableAmount : CountableAmount {
-    var nanoSeconds: Int64 { get }
+    var nanoSeconds: Int32 { get }
 }
 
 /**

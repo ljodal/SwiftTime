@@ -7,17 +7,50 @@
 //
 
 public protocol Temporal : Equatable {
-    func add(unit: TemporalUnit, amount: Int64) -> Self
-    func add(amount: TemporalAmount) -> Self
-    func +(lhs: Self, rhs: TemporalAmount) -> Self
+
+    //
+    // Addition and subtraction
+    //
+
+    func add<T : SecondsRepresentableAmount> (amount: T) -> Self
+    func add<T : NanoSecondsRepresentableAmount> (amount: T) -> Self
+    func add(amount: Duration) -> Self
+    func add(amount: Period) -> Self
+
+    func subtract<T : SecondsRepresentableAmount>(amount: T) -> Self
+    func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> Self
+    func subtract(amount: Duration) -> Self
+    func subtract(amount: Period) -> Self
 }
 
-extension Temporal {
-    func add(unit: TemporalUnit) -> Self {
-        return add(unit, amount: 1)
-    }
-}
-
-public func +<T : Temporal> (lhs: T, rhs: TemporalAmount) -> T {
+public func +<T : Temporal, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
     return lhs.add(rhs)
+}
+
+public func +<T : Temporal, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+    return lhs.add(rhs)
+}
+
+public func +<T : Temporal> (lhs: T, rhs: Duration) -> T {
+    return lhs.add(rhs)
+}
+
+public func +<T : Temporal> (lhs: T, rhs: Period) -> T {
+    return lhs.add(rhs)
+}
+
+public func -<T : Temporal, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+    return lhs.subtract(rhs)
+}
+
+public func -<T : Temporal, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+    return lhs.subtract(rhs)
+}
+
+public func -<T : Temporal> (lhs: T, rhs: Duration) -> T {
+    return lhs.subtract(rhs)
+}
+
+public func -<T : Temporal> (lhs: T, rhs: Period) -> T {
+    return lhs.subtract(rhs)
 }

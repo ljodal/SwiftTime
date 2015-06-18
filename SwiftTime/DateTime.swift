@@ -35,13 +35,45 @@ public struct DateTime : Temporal {
         self.nanos = nanos
         self.zone = zone
     }
-    
-    public func add(amount: TemporalAmount) -> DateTime {
-        return self
+
+    public func add<T : NanoSecondsRepresentableAmount>(amount: T) -> DateTime {
+        // TODO: Implement
+        abort()
     }
-    
-    public func add(unit: TemporalUnit, amount: Int64) -> DateTime {
-        return self
+
+    public func add<T : SecondsRepresentableAmount>(amount: T) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func add(amount: Duration) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func add(amount: Period) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func subtract<T : SecondsRepresentableAmount>(amount: T) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func subtract(amount: Duration) -> DateTime {
+        // TODO: Implement
+        abort()
+    }
+
+    public func subtract(amount: Period) -> DateTime {
+        // TODO: Implement
+        abort()
     }
 }
 
