@@ -11,14 +11,9 @@ A unit of time
 */
 public protocol TemporalUnit {
     /**
-    Add `amount` of this unit to the given temporal
-    */
-    static func addTo<T : Temporal>(temporal: T, amount: Int64) throws -> T
-    
-    /**
     Get the number of this unit between the two temporals
     */
-    static func between<T : Temporal>(start: T, and: T) -> Int64
+    //static func between<T : Temporal>(start: T, and: T) -> Int64
 }
 
 ///
@@ -111,6 +106,24 @@ public protocol SecondsRepresentableAmount : CountableAmount {
     var seconds: Int64 { get }
 }
 
+public extension SecondsRepresentableAmount {
+    final func add<T : SecondsRepresentableAmount>(other: T) -> Seconds {
+        return Seconds(self.seconds + other.seconds)
+    }
+
+    final func subtract<T : SecondsRepresentableAmount>(other: T) -> Seconds {
+        return Seconds(self.seconds - other.seconds)
+    }
+}
+
+public func +<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> Seconds {
+    return lhs.add(rhs)
+}
+
+public func -<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> Seconds {
+    return lhs.subtract(rhs)
+}
+
 ///
 /// A protocol for time amounts that can be representated as a number of nano seconds
 ///
@@ -152,14 +165,6 @@ public struct Hours : SecondsRepresentableAmount {
             throw DateTimeErrors.UnsupportedUnit
         }
     }
-
-    public func add(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
-    public func subtract(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
 }
 
 /**
@@ -196,14 +201,6 @@ public struct Minutes : SecondsRepresentableAmount {
             throw DateTimeErrors.UnsupportedUnit
         }
     }
-
-    public func add(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
-    public func subtract(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
 }
 
 /**
@@ -239,13 +236,5 @@ public struct Seconds : SecondsRepresentableAmount {
         default:
             throw DateTimeErrors.UnsupportedUnit
         }
-    }
-
-    public func add(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
-    public func subtract(other: TemporalAmount) -> TemporalAmount {
-        return self
     }
 }

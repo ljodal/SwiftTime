@@ -12,8 +12,6 @@ An amount of time
 public protocol TemporalAmount {
     func supports(field: TemporalUnit) -> Bool
     func get(unit: TemporalUnit) throws -> Int64
-    func add(other: TemporalAmount) -> TemporalAmount
-    func subtract(other: TemporalAmount) -> TemporalAmount
 }
 
 public protocol TemporalAmountMath : TemporalAmount {
@@ -75,14 +73,6 @@ public struct Duration : TemporalAmount {
         }
     }
 
-    public func add(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
-    public func subtract(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
     public func add(other: Duration) -> Duration {
         return Duration(seconds: self.seconds + other.seconds,
             nanoSeconds: self.nanoSeconds + other.nanoSeconds)
@@ -140,13 +130,5 @@ public struct Period : TemporalAmount {
 
     public func get(field: TemporalUnit) throws -> Int64 {
         throw DateTimeErrors.UnsupportedUnit
-    }
-
-    public func add(other: TemporalAmount) -> TemporalAmount {
-        return self
-    }
-
-    public func subtract(other: TemporalAmount) -> TemporalAmount {
-        return self
     }
 }
