@@ -81,7 +81,7 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + (-1).months
             let d3 = try LocalDate(year: 2014, month: 12, day: 1)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
@@ -95,7 +95,7 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + (-12).months
             let d3 = try LocalDate(year: 2014, month: 1, day: 1)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
@@ -109,7 +109,7 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + (-10).months
             let d3 = try LocalDate(year: 2014, month: 3, day: 1)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
@@ -123,7 +123,7 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + 1.years
             let d3 = try LocalDate(year: 2016, month: 1, day: 1)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
@@ -137,7 +137,7 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + 1.years
             let d3 = try LocalDate(year: 2005, month: 2, day: 28)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
@@ -151,11 +151,29 @@ class SwiftTimeTests: XCTestCase {
             let d2 = d1 + 10.years
             let d3 = try LocalDate(year: 2010, month: 2, day: 28)
 
-            assert(d2 == d3)
+            XCTAssert(d2 == d3)
         } catch DateTimeErrors.InvalidDate(let message) {
             XCTAssert(false, message)
         } catch {
             XCTAssert(false, "Error occured: \(error)")
         }
+    }
+
+    func testLeapYearsBetween1() {
+        let c = ISOChronology()
+        let leaps = c.leapYears(from: 2000, to: 2016)
+        XCTAssert(leaps == 4, "Expected 4 leap years, was: \(leaps)")
+    }
+
+    func testLeapYearsBetween2() {
+        let c = ISOChronology()
+        let leaps = c.leapYears(from: -2016, to: -2000)
+        XCTAssert(leaps == 4, "Expected 4 leap years, was: \(leaps)")
+    }
+
+    func testLeapYearsBetween3() {
+        let c = ISOChronology()
+        let leaps = c.leapYears(from: 0, to: 400)
+        XCTAssert(leaps == 97, "Expected 97 leap years, was: \(leaps)")
     }
 }
