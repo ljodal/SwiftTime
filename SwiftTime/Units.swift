@@ -158,6 +158,45 @@ public protocol NanoSecondsRepresentableAmount {
 // MARK: Structs
 //
 
+///
+/// A unit representing a number of years
+///
+public struct Years: CountableAmount, MonthsRepresentableAmount {
+
+    public var count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public var months: Int64 {
+        get {
+            return self.count * 12
+        }
+    }
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is Years:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is Years:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
+}
+
+///
+/// A unit representing a number of months
+///
 public struct Months: CountableAmount, MonthsRepresentableAmount {
 
     public var count: Int64

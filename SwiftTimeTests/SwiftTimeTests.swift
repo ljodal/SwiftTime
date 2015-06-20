@@ -116,4 +116,46 @@ class SwiftTimeTests: XCTestCase {
             XCTAssert(false, "Error occured: \(error)")
         }
     }
+
+    func testLocalDateAddYear1() {
+        do {
+            let d1 = try LocalDate(year: 2015, month: 1, day: 1)
+            let d2 = d1 + 1.years
+            let d3 = try LocalDate(year: 2016, month: 1, day: 1)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testLocalDateAddYear2() {
+        do {
+            let d1 = try LocalDate(year: 2004, month: 2, day: 29)
+            let d2 = d1 + 1.years
+            let d3 = try LocalDate(year: 2005, month: 2, day: 28)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testLocalDateAddYear3() {
+        do {
+            let d1 = try LocalDate(year: 2000, month: 2, day: 28)
+            let d2 = d1 + 10.years
+            let d3 = try LocalDate(year: 2010, month: 2, day: 28)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
 }
