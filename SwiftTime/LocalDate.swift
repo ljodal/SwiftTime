@@ -8,6 +8,11 @@
 
 /// A struct that represents a date without a time zone, in ISO-chronology
 public struct LocalDate : Equatable {
+
+    //
+    // MARK: Attributes
+    //
+
     public var year: Int64
     public var month: Int8
     public var day: Int8
@@ -47,7 +52,10 @@ public struct LocalDate : Equatable {
     //
 
     ///
-    /// Add the given number of months to this date
+    /// Add the given number of months to this date.
+    ///
+    /// * Note: If the current day does not exist in the resulting month,
+    ///         the last day of the resulting month is used
     ///
     public func add(m: MonthsRepresentableAmount) -> LocalDate {
         var months = Int64(self.month) + m.months
