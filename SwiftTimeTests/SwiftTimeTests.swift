@@ -159,6 +159,19 @@ class SwiftTimeTests: XCTestCase {
         }
     }
 
+    func testOrdinalDate() {
+        do {
+            let d1 = try LocalDate(year: 2000, dayOfYear: 28)
+            let d2 = try LocalDate(year: 2000, month: 1, day: 28)
+
+            XCTAssert(d1 == d2)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
     func testLeapYearsBetween1() {
         let c = ISOChronology()
         let leaps = c.leapYears(from: 2000, to: 2016)

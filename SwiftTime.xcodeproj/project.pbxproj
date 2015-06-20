@@ -16,7 +16,6 @@
 		16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */; };
 		16381BF11B2F681900882BEF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE81B2F681900882BEF /* Units.swift */; };
 		16381BF21B2F681900882BEF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE91B2F681900882BEF /* Errors.swift */; };
-		16381BF31B2F681900882BEF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEA1B2F681900882BEF /* Utils.swift */; };
 		16381BF41B2F681900882BEF /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEB1B2F681900882BEF /* DateTime.swift */; };
 		16381BF51B2F681900882BEF /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEC1B2F681900882BEF /* Zone.swift */; };
 		16381BF81B34A48500882BEF /* Chronology.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BF71B34A48500882BEF /* Chronology.swift */; };
@@ -46,7 +45,6 @@
 		16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericTimeExtensions.swift; sourceTree = "<group>"; };
 		16381BE81B2F681900882BEF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		16381BE91B2F681900882BEF /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		16381BEA1B2F681900882BEF /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16381BEB1B2F681900882BEF /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		16381BEC1B2F681900882BEF /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
 		16381BF71B34A48500882BEF /* Chronology.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chronology.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 				16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */,
 				16381BE81B2F681900882BEF /* Units.swift */,
 				16381BE91B2F681900882BEF /* Errors.swift */,
-				16381BEA1B2F681900882BEF /* Utils.swift */,
 				16381BEC1B2F681900882BEF /* Zone.swift */,
 				16381BF71B34A48500882BEF /* Chronology.swift */,
 				16381BF91B34AB3A00882BEF /* LocalDate.swift */,
@@ -230,7 +227,6 @@
 				16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */,
 				16381BED1B2F681900882BEF /* Instant.swift in Sources */,
 				16381BEF1B2F681900882BEF /* Amounts.swift in Sources */,
-				16381BF31B2F681900882BEF /* Utils.swift in Sources */,
 				16381BF11B2F681900882BEF /* Units.swift in Sources */,
 				16381BF51B2F681900882BEF /* Zone.swift in Sources */,
 				16381BF21B2F681900882BEF /* Errors.swift in Sources */,

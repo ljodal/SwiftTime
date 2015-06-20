@@ -17,6 +17,9 @@ public struct LocalDate : Equatable {
     public var month: Int8
     public var day: Int8
 
+    // Currently we only support ISO chronology
+    private let chronology: ISOChronology
+
     //
     // MARK: Initializers
     //
@@ -25,17 +28,38 @@ public struct LocalDate : Equatable {
     /// Initializer that validates the input.
     ///
     public init(year: Int64, month: Int8, day: Int8) throws {
+        let chronology = ISOChronology()
+
         guard (1...12).contains(month) else {
             throw DateTimeErrors.InvalidDate(message: "Invalid month: \(month)")
         }
 
-        guard day > 0 && daysInMonth(month, year: year) >= day else {
+        guard day > 0 && chronology.daysInMonth(month, year: year) >= day else {
             throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(month)-\(day)")
         }
 
         self.year = year
         self.month = month
         self.day = day
+        self.chronology = chronology
+    }
+
+    ///
+    /// Initialize a local date with the given year and ordinal date.
+    ///
+    public init(year: Int64, dayOfYear: Int64) throws {
+        let chronology = ISOChronology()
+
+        if dayOfYear > 0 && dayOfYear < (chronology.isLeapYear(year) ? 365 : 366) {
+            let (_month, _day) = chronology.ordinalDay(year: year, day: Int64(dayOfYear))
+
+            self.year = year
+            self.month = _month
+            self.day = _day
+            self.chronology = chronology
+        } else {
+            throw DateTimeErrors.InvalidDate(message: "Invalid ordnial date: \(year)-\(dayOfYear)")
+        }
     }
 
     ///
@@ -45,6 +69,7 @@ public struct LocalDate : Equatable {
         self.year = year
         self.month = month
         self.day = day
+        self.chronology = ISOChronology()
     }
 
     //
@@ -72,7 +97,7 @@ public struct LocalDate : Equatable {
         // If the day is larger than the last day of the month, we snap
         // to the last day of the month
         var day = self.day
-        let last = daysInMonth(Int8(months), year: years)
+        let last = chronology.daysInMonth(Int8(months), year: years)
         if day > last {
             day = last
         }
