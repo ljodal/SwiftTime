@@ -231,6 +231,42 @@ public struct Months: CountableAmount, MonthsRepresentableAmount {
     }
 }
 
+///
+/// A unit representing a number of days
+///
+public struct Days : CountableAmount, DaysRepresentableAmount {
+
+    public var count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public var days: Int64 {
+        get {
+            return count
+        }
+    }
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is Days:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is Days:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
+}
+
 /**
 A unit representing an hour
 */
