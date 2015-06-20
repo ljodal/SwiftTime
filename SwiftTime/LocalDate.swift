@@ -81,6 +81,14 @@ public struct LocalDate : Equatable {
     // MARK: Arithmithic
     //
 
+
+    ///
+    /// Subtract the given amount of months from this date
+    ///
+    public func subtract(d: MonthsRepresentableAmount) -> LocalDate {
+        return add(Months(-d.months))
+    }
+
     ///
     /// Add the given number of months to this date.
     ///
@@ -108,6 +116,13 @@ public struct LocalDate : Equatable {
         }
 
         return LocalDate(years, Int8(months), day)
+    }
+
+    ///
+    /// Subtract the given amount of days from this date
+    ///
+    public func subtract(d: DaysRepresentableAmount) -> LocalDate {
+        return add(Days(-d.days))
     }
 
     ///
@@ -140,11 +155,11 @@ public func + (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
 }
 
 public func - (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
-    return lhs.add(Months(-rhs.months))
+    return lhs.subtract(rhs)
 }
 
 public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
-    return lhs.add(rhs)
+    return lhs.subtract(rhs)
 }
 
 public func == (lhs: LocalDate, rhs: LocalDate) -> Bool {
