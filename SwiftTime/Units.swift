@@ -80,6 +80,10 @@ public func *=<T : CountableAmount>(inout lhs: T, factor: Int) {
     lhs.count *= Int64(factor)
 }
 
+public prefix func - <T : CountableAmount>(amount: T) -> T {
+    return T(-amount.count)
+}
+
 public extension CountableAmount {
     final func add(other: Self) -> Self {
         return Self(self.count + other.count)
@@ -96,14 +100,6 @@ public extension CountableAmount {
     final func divide(divider: Int) -> Self {
         return Self(self.count / Int64(divider))
     }
-}
-
-
-///
-/// A protocol for time amounts that can be represented as a number of months
-///
-public protocol YearsRepresentableAmount {
-    var years: Int64 { get }
 }
 
 ///

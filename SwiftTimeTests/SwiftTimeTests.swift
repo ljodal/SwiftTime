@@ -8,7 +8,7 @@
 
 import XCTest
 
-import SwiftTime
+@testable import SwiftTime
 
 class SwiftTimeTests: XCTestCase {
     

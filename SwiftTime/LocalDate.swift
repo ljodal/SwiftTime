@@ -131,14 +131,22 @@ public struct LocalDate : Equatable {
 // MARK: Operators
 //
 
-public func +(lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
+public func + (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
     return lhs.add(rhs)
 }
 
-public func +(lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
+public func + (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
     return lhs.add(rhs)
 }
 
-public func ==(lhs: LocalDate, rhs: LocalDate) -> Bool {
+public func - (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
+    return lhs.add(Months(-rhs.months))
+}
+
+public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
+    return lhs.add(rhs)
+}
+
+public func == (lhs: LocalDate, rhs: LocalDate) -> Bool {
     return lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day
 }
