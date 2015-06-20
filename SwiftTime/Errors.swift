@@ -8,6 +8,7 @@
 
 public enum DateTimeErrors : ErrorType {
     case UnsupportedUnit
-    case InvalidMonth
+    case InvalidMonth(value: Int8)
+    case InvalidDate(message: String)
     case UnsupportedAmount
 }

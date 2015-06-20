@@ -19,6 +19,8 @@
 		16381BF31B2F681900882BEF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEA1B2F681900882BEF /* Utils.swift */; };
 		16381BF41B2F681900882BEF /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEB1B2F681900882BEF /* DateTime.swift */; };
 		16381BF51B2F681900882BEF /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BEC1B2F681900882BEF /* Zone.swift */; };
+		16381BF81B34A48500882BEF /* Chronology.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BF71B34A48500882BEF /* Chronology.swift */; };
+		16381BFA1B34AB3A00882BEF /* LocalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BF91B34AB3A00882BEF /* LocalDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		16381BEA1B2F681900882BEF /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16381BEB1B2F681900882BEF /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		16381BEC1B2F681900882BEF /* Zone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
+		16381BF71B34A48500882BEF /* Chronology.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chronology.swift; sourceTree = "<group>"; };
+		16381BF91B34AB3A00882BEF /* LocalDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				16381BE91B2F681900882BEF /* Errors.swift */,
 				16381BEA1B2F681900882BEF /* Utils.swift */,
 				16381BEC1B2F681900882BEF /* Zone.swift */,
+				16381BF71B34A48500882BEF /* Chronology.swift */,
+				16381BF91B34AB3A00882BEF /* LocalDate.swift */,
 			);
 			path = SwiftTime;
 			sourceTree = "<group>";
@@ -228,8 +234,10 @@
 				16381BF11B2F681900882BEF /* Units.swift in Sources */,
 				16381BF51B2F681900882BEF /* Zone.swift in Sources */,
 				16381BF21B2F681900882BEF /* Errors.swift in Sources */,
+				16381BF81B34A48500882BEF /* Chronology.swift in Sources */,
 				16381BF41B2F681900882BEF /* DateTime.swift in Sources */,
 				16381BEE1B2F681900882BEF /* Temporal.swift in Sources */,
+				16381BFA1B34AB3A00882BEF /* LocalDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +424,7 @@
 				16381BE01B2F67C300882BEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		16381BE11B2F67C300882BEF /* Build configuration list for PBXNativeTarget "SwiftTimeTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +433,7 @@
 				16381BE31B2F67C300882BEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

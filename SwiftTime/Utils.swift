@@ -6,18 +6,15 @@
 //  Copyright © 2015 Sigurd Ljødal. All rights reserved.
 //
 
-let daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+private let minDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+private let maxDaysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-func daysInMonth(month: Int, year: Int64) throws -> Int {
-    switch month {
-    case 1:
-        return daysInMonth[0]
-    case 2:
-        return isLeapYear(year) == true ? 29 : 28
-    case 3...12:
-        return daysInMonth[month - 1]
-    default:
-        throw DateTimeErrors.InvalidMonth
+func daysInMonth(month: Int8, year: Int64) -> Int8 {
+    print("Days: \(year)-\(month)")
+    if (isLeapYear(year)) {
+        return Int8(maxDaysInMonth[month - 1])
+    } else {
+        return Int8(minDaysInMonth[month - 1])
     }
 }
 

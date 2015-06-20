@@ -8,22 +8,22 @@
 
 public struct DateTime : Temporal {
     let year: Int64
-    let month: Int64
-    let date: Int64
-    let hours: Int64
-    let minutes: Int64
-    let seconds: Int64
-    let nanos: Int64
+    let month: Int8
+    let date: Int8
+    let hours: Int8
+    let minutes: Int8
+    let seconds: Int8
+    let nanos: Int32
     let zone: TimeZone
     
     public init(
         year: Int64 = 0,
-        month: Int64 = 1,
-        date: Int64 = 1,
-        hours: Int64 = 0,
-        minutes: Int64 = 0,
-        seconds: Int64 = 0,
-        nanos: Int64 = 0,
+        month: Int8 = 1,
+        date: Int8 = 1,
+        hours: Int8 = 0,
+        minutes: Int8 = 0,
+        seconds: Int8 = 0,
+        nanos: Int32 = 0,
         zone: TimeZone = TZ.UTC)
     {
         self.year = year

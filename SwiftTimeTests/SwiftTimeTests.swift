@@ -26,36 +26,94 @@ class SwiftTimeTests: XCTestCase {
         let d1 = Instant(seconds: 123)
         let d2 = d1 + 123.seconds
         
-        assert(d2.seconds == 246)
-        assert(d2.nanos == 0)
+        XCTAssert(d2.seconds == 246)
+        XCTAssert(d2.nanos == 0)
     }
     
     func testEquals() {
         let d1 = Instant(seconds: 123)
         let d2 = Instant(seconds: 123)
         
-        assert(d1 == d2)
+        XCTAssert(d1 == d2)
     }
     
     func testNotEquals() {
         let d1 = Instant(seconds: 123)
         let d2 = Instant(seconds: 234)
         
-        assert(d1 != d2)
+        XCTAssert(d1 != d2)
     }
 
     func testAdd() {
         var h1 = 1.hours
         h1 += 2.hours
 
-        assert(h1 == 3.hours)
-        assert(h1 != 1.hours)
+        XCTAssert(h1 == 3.hours)
+        XCTAssert(h1 != 1.hours)
     }
 
     func testAdd2() {
         let h1 = 1.hours + 30.minutes
 
-        assert(h1 == 5400.seconds)
-        assert(h1 != 5432.seconds)
+        XCTAssert(h1 == 5400.seconds)
+        XCTAssert(h1 != 5432.seconds)
+    }
+
+    func testLocalDate1() {
+        let d1 = try! LocalDate(year: 2015, month: 1, day: 31)
+        let d2 = d1 + 1.months
+        let d3 = try! LocalDate(year: 2015, month: 2, day: 28)
+
+        XCTAssert(d2 == d3)
+    }
+
+    func testLocalDate2() {
+        let d1 = try! LocalDate(year: 2015, month: 12, day: 31)
+        let d2 = d1 + 0.months
+        let d3 = try! LocalDate(year: 2015, month: 12, day: 31)
+
+        XCTAssert(d2 == d3)
+    }
+
+    func testLocalDate3() {
+        do {
+            let d1 = try LocalDate(year: 2015, month: 1, day: 1)
+            let d2 = d1 + (-1).months
+            let d3 = try LocalDate(year: 2014, month: 12, day: 1)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testLocalDate4() {
+        do {
+            let d1 = try LocalDate(year: 2015, month: 1, day: 1)
+            let d2 = d1 + (-12).months
+            let d3 = try LocalDate(year: 2014, month: 1, day: 1)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testLocalDate5() {
+        do {
+            let d1 = try LocalDate(year: 2015, month: 1, day: 1)
+            let d2 = d1 + (-10).months
+            let d3 = try LocalDate(year: 2014, month: 3, day: 1)
+
+            assert(d2 == d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
     }
 }

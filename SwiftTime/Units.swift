@@ -100,9 +100,32 @@ public extension CountableAmount {
 
 
 ///
+/// A protocol for time amounts that can be represented as a number of months
+///
+public protocol YearsRepresentableAmount {
+    var years: Int64 { get }
+}
+
+///
+/// A protocol for time amounts that can be represented as a number of months
+///
+public protocol MonthsRepresentableAmount {
+    var months: Int64 { get }
+}
+
+
+///
+/// A protocol for time amounts that can be represented as a number of days
+///
+public protocol DaysRepresentableAmount {
+    var days: Int64 { get }
+}
+
+
+///
 /// A protocol for time amounts that can be representated as a number of seconds
 ///
-public protocol SecondsRepresentableAmount : CountableAmount {
+public protocol SecondsRepresentableAmount {
     var seconds: Int64 { get }
 }
 
@@ -127,14 +150,52 @@ public func -<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (l
 ///
 /// A protocol for time amounts that can be representated as a number of nano seconds
 ///
-public protocol NanoSecondsRepresentableAmount : CountableAmount {
+public protocol NanoSecondsRepresentableAmount {
     var nanoSeconds: Int32 { get }
+}
+
+//
+// MARK: Structs
+//
+
+public struct Months: CountableAmount, MonthsRepresentableAmount {
+
+    public var count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public var months: Int64 {
+        get {
+            return self.count
+        }
+    }
+
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is Months:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is Months:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
 }
 
 /**
 A unit representing an hour
 */
-public struct Hours : SecondsRepresentableAmount {
+public struct Hours : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
 
@@ -170,7 +231,7 @@ public struct Hours : SecondsRepresentableAmount {
 /**
 A unit representing a minute
 */
-public struct Minutes : SecondsRepresentableAmount {
+public struct Minutes : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
 
@@ -206,7 +267,7 @@ public struct Minutes : SecondsRepresentableAmount {
 /**
 A unit representing a second
 */
-public struct Seconds : SecondsRepresentableAmount {
+public struct Seconds : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
 

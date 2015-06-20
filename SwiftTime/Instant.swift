@@ -90,6 +90,18 @@ public struct Instant : Temporal {
         return new
     }
 
+    //
+    // Convert
+    //
+
+    /// Convert to a `DateTime`
+    public func inZone(zone: TimeZone) -> DateTime {
+        //let daysSinceEpoch = self.seconds / 84_600
+        //let secondsInDay = self.seconds % 64_600
+
+        abort()
+    }
+
     /// Helper method to fix too many nano seconds
     private static func normalize(inout instant: Instant) {
 
