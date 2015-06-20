@@ -13,8 +13,13 @@ public struct LocalDate : Equatable {
     // MARK: Attributes
     //
 
+    /// Year
     public var year: Int64
+
+    /// Month of the year, 1 indexed
     public var month: Int8
+
+    /// Day of the month, 1 indexed
     public var day: Int8
 
     // Currently we only support ISO chronology
@@ -79,7 +84,7 @@ public struct LocalDate : Equatable {
     ///
     /// Add the given number of months to this date.
     ///
-    /// * Note: If the current day does not exist in the resulting month,
+    /// - Note: If the current day does not exist in the resulting month,
     ///         the last day of the resulting month is used
     ///
     public func add(m: MonthsRepresentableAmount) -> LocalDate {
@@ -104,6 +109,22 @@ public struct LocalDate : Equatable {
 
         return LocalDate(years, Int8(months), day)
     }
+
+    ///
+    /// Add the given amount of days to this date
+    ///
+    public func add(d: DaysRepresentableAmount) -> LocalDate {
+        var dayOfYear = chronology.ordinalDay(year: self.year, month: month, day: day)
+        dayOfYear += d.days
+        var year = self.year
+
+        if dayOfYear > Int64(chronology.isLeapYear(year) ? 365 : 366) {
+            year += Int64(Double(dayOfYear) / 365.2524)
+            dayOfYear -= chronology.daysBetween(from: self.year, to: year)
+        }
+
+        return try! LocalDate(year: year, dayOfYear: dayOfYear)
+    }
 }
 
 //
@@ -111,6 +132,10 @@ public struct LocalDate : Equatable {
 //
 
 public func +(lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
+    return lhs.add(rhs)
+}
+
+public func +(lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
     return lhs.add(rhs)
 }
 

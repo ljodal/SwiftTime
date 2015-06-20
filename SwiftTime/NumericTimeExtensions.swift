@@ -20,6 +20,12 @@ extension Int {
         }
     }
 
+    public var days: Days {
+        get {
+            return Days(Int64(self))
+        }
+    }
+
     public var hours: Hours {
         get {
             return Hours(Int64(self))
@@ -50,6 +56,12 @@ extension Int8 {
     public var months: Months {
         get {
             return Months(Int64(self))
+        }
+    }
+
+    public var days: Days {
+        get {
+            return Days(Int64(self))
         }
     }
 
@@ -86,6 +98,12 @@ extension Int16 {
         }
     }
 
+    public var days: Days {
+        get {
+            return Days(Int64(self))
+        }
+    }
+
     public var hours: Hours {
         get {
             return Hours(Int64(self))
@@ -119,6 +137,12 @@ extension Int32 {
         }
     }
 
+    public var days: Days {
+        get {
+            return Days(Int64(self))
+        }
+    }
+
     public var hours: Hours {
         get {
             return Hours(Int64(self))
@@ -149,6 +173,12 @@ extension Int64 {
     public var months: Months {
         get {
             return Months(self)
+        }
+    }
+
+    public var days: Days {
+        get {
+            return Days(self)
         }
     }
 
