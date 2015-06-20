@@ -190,6 +190,34 @@ class SwiftTimeTests: XCTestCase {
     func testAdd100Days() {
         do {
             let d1 = try LocalDate(year: 2010, month: 1, day: 1)
+            let d2 = d1 + 1000.days
+            let d3 = try LocalDate(year: 2012, month: 9, day: 27)
+
+            XCTAssertEqual(d2, d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testAdd4YearsInDays() {
+        do {
+            let d1 = try LocalDate(year: 1896, month: 2, day: 29)
+            let d2 = d1 + 1461.days
+            let d3 = try LocalDate(year: 1900, month: 3, day: 1)
+
+            XCTAssertEqual(d2, d3)
+        } catch DateTimeErrors.InvalidDate(let message) {
+            XCTAssert(false, message)
+        } catch {
+            XCTAssert(false, "Error occured: \(error)")
+        }
+    }
+
+    func testAdd1000Days() {
+        do {
+            let d1 = try LocalDate(year: 2010, month: 1, day: 1)
             let d2 = d1 + 100.days
             let d3 = try LocalDate(year: 2010, month: 4, day: 11)
 
