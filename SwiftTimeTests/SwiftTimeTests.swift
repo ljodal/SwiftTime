@@ -285,4 +285,49 @@ class SwiftTimeTests: XCTestCase {
         let leaps = c.leapYears(from: 0, to: 400)
         XCTAssertEqual(leaps, 97, "Expected 97 leap years, was: \(leaps)")
     }
+
+    func testOrdinal1() {
+        let c = ISOChronology()
+        let (y, m, d) = c.ordinalDay(year: 2015, days: 366)
+
+        XCTAssertEqual(y, 2016)
+        XCTAssertEqual(m, 1)
+        XCTAssertEqual(d, 1)
+    }
+
+    func testOrdinal2() {
+        let c = ISOChronology()
+        let (y, m, d) = c.ordinalDay(year: 2015, days: 0)
+
+        XCTAssertEqual(y, 2014)
+        XCTAssertEqual(m, 12)
+        XCTAssertEqual(d, 31)
+    }
+
+    func testOrdinal3() {
+        let c = ISOChronology()
+        let (y, m, d) = c.ordinalDay(year: 2015, days: -1)
+
+        XCTAssertEqual(y, 2014)
+        XCTAssertEqual(m, 12)
+        XCTAssertEqual(d, 30)
+    }
+
+    func testOrdinal4() {
+        let c = ISOChronology()
+        let (y, m, d) = c.ordinalDay(year: 2010, days: 59)
+
+        XCTAssertEqual(y, 2010)
+        XCTAssertEqual(m, 2)
+        XCTAssertEqual(d, 28)
+    }
+
+    func testOrdinal5() {
+        let c = ISOChronology()
+        let (y, m, d) = c.ordinalDay(year: 2010, days: 60)
+
+        XCTAssertEqual(y, 2010)
+        XCTAssertEqual(m, 3)
+        XCTAssertEqual(d, 1)
+    }
 }

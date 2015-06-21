@@ -43,6 +43,7 @@ public struct LocalDate : Equatable {
             throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(month)-\(day)")
         }
 
+        // Set variables
         self.year = year
         self.month = month
         self.day = day
@@ -50,21 +51,26 @@ public struct LocalDate : Equatable {
     }
 
     ///
-    /// Initialize a local date with the given year and ordinal date.
+    /// Initialize a local date with the given year and ordinal date. If input is not
+    /// a valid date, and error is thrown.
     ///
-    public init(year: Int64, dayOfYear: Int64) throws {
+    public init(year: Int64, dayOfYear: Int) throws {
         let chronology = ISOChronology()
 
-        if dayOfYear > 0 && dayOfYear < (chronology.isLeapYear(year) ? 365 : 366) {
-            let (_month, _day) = chronology.ordinalDay(year: year, day: Int64(dayOfYear))
-
-            self.year = year
-            self.month = _month
-            self.day = _day
-            self.chronology = chronology
-        } else {
-            throw DateTimeErrors.InvalidDate(message: "Invalid ordnial date: \(year)-\(dayOfYear)")
+        // Validate that the given ordinal day is valid
+        guard dayOfYear > 0 && dayOfYear <= chronology.daysIn(year: year) else {
+            throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(dayOfYear)")
         }
+
+        // Convert the ordinal day to a normal date
+        let (_y, _m, _d) = chronology.ordinalDay(year: year, days: Int64(dayOfYear))
+
+        // Set variables
+        self.year = _y
+        self.month = _m
+        self.day = _d
+        self.chronology = chronology
+
     }
 
     ///
@@ -129,16 +135,18 @@ public struct LocalDate : Equatable {
     /// Add the given amount of days to this date
     ///
     public func add(d: DaysRepresentableAmount) -> LocalDate {
-        var dayOfYear = chronology.ordinalDay(year: self.year, month: month, day: day)
-        dayOfYear += d.days
-        var year = self.year
+        // Get the ordinal day or the year, and add the given number of days
+        // to that.
+        var day = chronology.ordinalDay(year: self.year, month: month, day: self.day)
+        day += d.days
 
-        if dayOfYear > Int64(chronology.isLeapYear(year) ? 365 : 366) {
-            year += Int64(Double(dayOfYear) / 365.2524)
-            dayOfYear -= chronology.daysBetween(from: self.year, to: year)
-        }
+        // Convert ordnial date to year, month, and day. Chronology handles
+        // any number of days and will always return a valid date.
+        let (y, m, d) = chronology.ordinalDay(year: self.year, days: day)
 
-        return try! LocalDate(year: year, dayOfYear: dayOfYear)
+        // Return a LocaDate. This is guaranteed to not fail, as the values
+        // returned from the method above will always be valid
+        return LocalDate(y, m, d)
     }
 }
 

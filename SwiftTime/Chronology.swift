@@ -17,7 +17,7 @@ internal protocol Chronology {
     func ordinalDay(year year: Int64, month: Int8, day: Int8) -> Int64
 
     /// Convert the given ordinal day into a date
-    func ordinalDay(year year: Int64, day: Int64) -> (Int8, Int8)
+    func ordinalDay(year year: Int64, days: Int64) -> (Int64, Int8, Int8)
 
     /// Check if the given year is a leap year
     func isLeapYear(year: Int64) -> Bool
@@ -65,7 +65,7 @@ internal class ISOChronology : Chronology {
     }
 
     ///
-    /// Convert from year, month and date to ordinal date
+    /// Convert from year, month and date to ordinal day
     ///
     internal func ordinalDay(year year: Int64, month: Int8, day: Int8) -> Int64 {
         if isLeapYear(year) {
@@ -76,26 +76,69 @@ internal class ISOChronology : Chronology {
     }
 
     ///
-    /// Convert from year and ordinal date to month and day
+    /// Convert the year and ordinal date to year, month and date
     ///
-    internal func ordinalDay(year year: Int64, day: Int64) -> (Int8, Int8) {
+    /// - Note: Supports any number of days, so year can change.
+    /// - Note:
+    ///
+    internal func ordinalDay(year year: Int64, days: Int64) -> (Int64, Int8, Int8) {
 
-        let days = isLeapYear(year) ? maxDaysInMonth : minDaysInMonth
+        // First find out which year we end up in
+        var y = year + estimatedYears(days: days)
+        var d = daysBetween(from: year, to: y)
 
-        // TODO: Über-naive implementation. Should be fixed
-        var _day = day
-        var _month = 1
-        for i in 0...11 {
-            let d = Int64(days[i])
-            if _day > d {
-                _month += 1
-                _day -= d
-            } else {
-                break
-            }
+        if days < d {
+            y -= 1
+            d = daysBetween(from: year, to: y)
         }
 
-        return (Int8(_month), Int8(_day))
+        // Resulting ordinal day
+        d = days - d
+
+        // If day is less than one, we end up in the previous year
+        if d < 1 {
+            y--
+            d = daysIn(year: y) + d
+        }
+
+        // Find out which month we are in
+        let (month, day) = fromOrdinal(year: y, days: d)
+
+        return (y, month, day)
+    }
+
+    ///
+    /// Get the month that the given ordinal day is in in the given year
+    ///
+    private func fromOrdinal(year year: Int64, days: Int64) -> (Int8, Int8) {
+        // Cached reference to the first day of month array
+        let firstDay = isLeapYear(year) ? maxFirstDayOfMonth : minFirstDayOfMonth
+
+        // Estimate the month and get the first day in that month
+        var estimatedMonth = Int8(days / 31) + 1
+        let firstOfMonth = firstDay[estimatedMonth - 1]
+
+        // If days is less than the first day of the estimated month,
+        // we are in the previous month. If days is higher than the first
+        // day of the next month, we are in the next month
+        if days <= Int64(firstOfMonth) {
+            estimatedMonth--
+        } else if estimatedMonth < 12 && days > firstDay[Int(estimatedMonth)] {
+            estimatedMonth++
+        }
+
+        // Calculate day of month
+        let day = Int8(days - firstDay[estimatedMonth - 1])
+
+        // Return day and month
+        return (estimatedMonth, day)
+    }
+
+    ///
+    /// Get the estimated number of years that this number of days represents
+    ///
+    private func estimatedYears(days days: Int64) -> Int64 {
+        return days / 365
     }
 
     ///
@@ -108,6 +151,13 @@ internal class ISOChronology : Chronology {
         var days = (to - from) * 365
         days += leapYears(from: from, to: to)
         return days
+    }
+
+    ///
+    /// Get the number of years in the given year
+    ///
+    internal func daysIn(year year: Int64) -> Int {
+        return isLeapYear(year) ? 366 : 365
     }
 
     ///
