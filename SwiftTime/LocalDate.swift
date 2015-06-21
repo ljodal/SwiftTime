@@ -7,7 +7,7 @@
 //
 
 /// A struct that represents a date without a time zone, in ISO-chronology
-public struct LocalDate : Equatable {
+public struct LocalDate : ForwardIndexType, Comparable {
 
     //
     // MARK: Attributes
@@ -156,10 +156,30 @@ public struct LocalDate : Equatable {
         // returned from the method above will always be valid
         return LocalDate(y, m, d)
     }
+
+    //
+    // MARK: ForwardIndexType implementation
+    //
+
+    public func successor() -> LocalDate {
+        return self + 1.days
+    }
 }
 
 //
-// MARK: Operators
+// MARK: Equatable and comparable implementation
+//
+
+public func == (lhs: LocalDate, rhs: LocalDate) -> Bool {
+    return lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day
+}
+
+public func <(lhs: LocalDate, rhs: LocalDate) -> Bool {
+    return lhs.toUnixTime() < rhs.toUnixTime()
+}
+
+//
+// MARK: Aritmethric Operators
 //
 
 public func + (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
@@ -178,6 +198,24 @@ public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
     return lhs.subtract(rhs)
 }
 
-public func == (lhs: LocalDate, rhs: LocalDate) -> Bool {
-    return lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day
+//
+// MARK: Range operators
+//
+
+public func ..< (start: LocalDate, end: LocalDate) -> Range<LocalDate> {
+
+    guard start <= end else {
+        fatalError("Can't form Range with end < start")
+    }
+
+    return Range(start: start, end: end)
+}
+
+public func ... (start: LocalDate, end: LocalDate) -> Range<LocalDate> {
+
+    guard start <= end else {
+        fatalError("Can't form Range with end < start")
+    }
+
+    return Range(start: start, end: end + 1.days)
 }

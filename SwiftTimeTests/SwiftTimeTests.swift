@@ -336,4 +336,15 @@ class SwiftTimeTests: XCTestCase {
 
         XCTAssertEqual(d1.toUnixTime(), 1420070400)
     }
+
+
+    func testRange1() {
+        let d1 = try! LocalDate(year: 2015, dayOfYear: 1)
+        let d2 = try! LocalDate(year: 2015, month: 2, day: 1)
+
+        let range = d1..<d2
+
+        XCTAssertEqual(range.count, 31)
+        XCTAssertEqual(range.first!, d1)
+    }
 }
