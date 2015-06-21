@@ -346,5 +346,17 @@ class SwiftTimeTests: XCTestCase {
 
         XCTAssertEqual(range.count, 31)
         XCTAssertEqual(range.first!, d1)
+        XCTAssertFalse(range.contains(d2))
+    }
+
+    func testRange2() {
+        let d1 = try! LocalDate(year: 2015, dayOfYear: 1)
+        let d2 = try! LocalDate(year: 2015, month: 2, day: 1)
+
+        let range = d1...d2
+
+        XCTAssertEqual(range.count, 32)
+        XCTAssertEqual(range.first!, d1)
+        XCTAssertTrue(range.contains(d2))
     }
 }

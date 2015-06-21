@@ -196,25 +196,3 @@ public func - (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
 public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
     return lhs.subtract(rhs)
 }
-
-//
-// MARK: Range operators
-//
-
-public func ..< (start: LocalDate, end: LocalDate) -> Range<LocalDate> {
-
-    guard start <= end else {
-        fatalError("Can't form Range with end < start")
-    }
-
-    return Range(start: start, end: end)
-}
-
-public func ... (start: LocalDate, end: LocalDate) -> Range<LocalDate> {
-
-    guard start <= end else {
-        fatalError("Can't form Range with end < start")
-    }
-
-    return Range(start: start, end: end + 1.days)
-}
