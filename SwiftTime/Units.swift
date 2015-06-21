@@ -166,9 +166,7 @@ public struct Years: CountableAmount, MonthsRepresentableAmount {
     }
 
     public var months: Int64 {
-        get {
-            return self.count * 12
-        }
+        return self.count * 12
     }
 
     public func supports(field: TemporalUnit) -> Bool {
@@ -202,9 +200,7 @@ public struct Months: CountableAmount, MonthsRepresentableAmount {
     }
 
     public var months: Int64 {
-        get {
-            return self.count
-        }
+        return self.count
     }
 
 
@@ -239,9 +235,7 @@ public struct Days : CountableAmount, DaysRepresentableAmount {
     }
 
     public var days: Int64 {
-        get {
-            return count
-        }
+        return count
     }
 
     public func supports(field: TemporalUnit) -> Bool {
@@ -275,9 +269,8 @@ public struct Hours : CountableAmount, SecondsRepresentableAmount {
     }
 
     public var seconds: Int64 {
-        get {
-            return count * 60 * 60
-        }
+        return count * 60 * 60
+
     }
 
     public func supports(field: TemporalUnit) -> Bool {
@@ -311,9 +304,7 @@ public struct Minutes : CountableAmount, SecondsRepresentableAmount {
     }
 
     public var seconds: Int64 {
-        get {
-            return count * 60
-        }
+        return count * 60
     }
 
     public func supports(field: TemporalUnit) -> Bool {
@@ -347,9 +338,7 @@ public struct Seconds : CountableAmount, SecondsRepresentableAmount {
     }
 
     public var seconds: Int64 {
-        get {
-            return count
-        }
+        return count
     }
 
     public func supports(field: TemporalUnit) -> Bool {
