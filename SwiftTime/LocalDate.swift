@@ -1,12 +1,8 @@
-//
-//  LocalDate.swift
-//  SwiftTime
-//
-//  Created by Sigurd Ljødal on 19.06.15.
-//  Copyright © 2015 Sigurd Ljødal. All rights reserved.
-//
-
-/// A struct that represents a date without a time zone, in ISO-chronology
+///
+/// A local date, without time zone or offset from UTC
+///
+/// All calculations assume 24 hours days
+///
 public struct LocalDate : ForwardIndexType, Comparable {
 
     //
@@ -87,6 +83,9 @@ public struct LocalDate : ForwardIndexType, Comparable {
     // MARK: Conversions
     //
 
+    ///
+    /// Get the Unix time at midnight
+    ///
     public func toUnixTime() -> Int64 {
         return chronology.toEpoch(year, month: month, day: day)
     }
