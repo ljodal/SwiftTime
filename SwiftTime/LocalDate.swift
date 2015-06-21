@@ -31,11 +31,11 @@ public struct LocalDate : ForwardIndexType, Comparable {
     public init(year: Int64, month: Int8, day: Int8) throws {
         let chronology = ISOChronology()
 
-        guard (1...12).contains(month) else {
+        guard 1...12 ~= month else {
             throw DateTimeErrors.InvalidDate(message: "Invalid month: \(month)")
         }
 
-        guard day > 0 && chronology.daysInMonth(month, year: year) >= day else {
+        guard 1...chronology.daysInMonth(month, year: year) ~= day else {
             throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(month)-\(day)")
         }
 
