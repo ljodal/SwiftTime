@@ -84,6 +84,14 @@ public struct LocalDate : Equatable {
     }
 
     //
+    // MARK: Conversions
+    //
+
+    public func toUnixTime() -> Int64 {
+        return chronology.toEpoch(year, month: month, day: day)
+    }
+
+    //
     // MARK: Arithmithic
     //
 

@@ -203,4 +203,25 @@ internal class ISOChronology : Chronology {
         let y = year - 1
         return (y / 4) - (y / 100) + (y / 400)
     }
+
+    //
+    // MARK: Convert to and from unix epoch
+    //
+
+    ///
+    /// Get the number of seconds since the Unix Epoch (1970-01-01)
+    ///
+    internal func toEpoch(year: Int64, month: Int8, day: Int8) -> Int64 {
+        var days: Int64 = 0
+
+        // Add days from 1970 to the given year
+        days += daysBetween(from: 1970, to: year)
+
+        // Add the ordinal day of the given date, minus one because we
+        // want the number of seconds until the given date, not including
+        days += ordinalDay(year: year, month: month, day: day) - 1
+
+        // Number of days in seconds
+        return days * 86_400
+    }
 }
