@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161CCE641B38A94100659D74 /* ZoneRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161CCE631B38A94100659D74 /* ZoneRule.swift */; };
 		16381BCE1B2F67C300882BEF /* SwiftTime.h in Headers */ = {isa = PBXBuildFile; fileRef = 16381BCD1B2F67C300882BEF /* SwiftTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		16381BD51B2F67C300882BEF /* SwiftTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16381BCA1B2F67C300882BEF /* SwiftTime.framework */; };
 		16381BDA1B2F67C300882BEF /* SwiftTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BD91B2F67C300882BEF /* SwiftTimeTests.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		161CCE631B38A94100659D74 /* ZoneRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneRule.swift; sourceTree = "<group>"; };
 		16381BCA1B2F67C300882BEF /* SwiftTime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftTime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16381BCD1B2F67C300882BEF /* SwiftTime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftTime.h; sourceTree = "<group>"; };
 		16381BCF1B2F67C300882BEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		161CCE621B38A8D100659D74 /* TZ */ = {
+			isa = PBXGroup;
+			children = (
+				16381BEC1B2F681900882BEF /* Zone.swift */,
+				161CCE631B38A94100659D74 /* ZoneRule.swift */,
+			);
+			name = TZ;
+			sourceTree = "<group>";
+		};
 		16381BC01B2F67C300882BEF = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +106,7 @@
 		16381BCC1B2F67C300882BEF /* SwiftTime */ = {
 			isa = PBXGroup;
 			children = (
+				161CCE621B38A8D100659D74 /* TZ */,
 				16381BCD1B2F67C300882BEF /* SwiftTime.h */,
 				16381BCF1B2F67C300882BEF /* Info.plist */,
 				16381BE51B2F681900882BEF /* Temporal.swift */,
@@ -104,7 +116,6 @@
 				16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */,
 				16381BE81B2F681900882BEF /* Units.swift */,
 				16381BE91B2F681900882BEF /* Errors.swift */,
-				16381BEC1B2F681900882BEF /* Zone.swift */,
 				16381BF71B34A48500882BEF /* Chronology.swift */,
 				16381BF91B34AB3A00882BEF /* LocalDate.swift */,
 				164E113A1B3758BC0000FD07 /* LocalTime.swift */,
@@ -239,6 +250,7 @@
 				16381BF21B2F681900882BEF /* Errors.swift in Sources */,
 				16381BF81B34A48500882BEF /* Chronology.swift in Sources */,
 				16381BF41B2F681900882BEF /* DateTime.swift in Sources */,
+				161CCE641B38A94100659D74 /* ZoneRule.swift in Sources */,
 				16381BEE1B2F681900882BEF /* Temporal.swift in Sources */,
 				16381BFA1B34AB3A00882BEF /* LocalDate.swift in Sources */,
 			);
