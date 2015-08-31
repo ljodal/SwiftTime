@@ -11,23 +11,23 @@
  * Unix Epoch (1970-01-01)
  */
 public struct Instant : Temporal {
-    public var seconds: Int64
-    public var nanos: Int32
+    public var seconds: Seconds
+    public var nanos: NanoSeconds
     
     public init(seconds: Int64) {
-        self.seconds = seconds
-        self.nanos = 0
+        self.seconds = seconds.seconds
+        self.nanos = 0.nanoSeconds
     }
     
     public init(seconds: Int64, nanos: Int32) {
-        self.seconds = seconds
-        self.nanos = nanos
+        self.seconds = seconds.seconds
+        self.nanos = nanos.nanoSeconds
         Instant.normalize(&self)
     }
     
     public init(millis: Int64) {
-        self.seconds = millis / 1_000
-        self.nanos = Int32(millis % 1_000) * 1_000_000
+        self.seconds = (millis / 1_000).seconds
+        self.nanos = ((millis % 1_000) * 1_000_000).nanoSeconds
     }
 
     //
@@ -49,14 +49,14 @@ public struct Instant : Temporal {
 
     public func add<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
         var new = self
-        new.nanos += amount.nanoSeconds
+        new.nanos += NanoSeconds(amount)
         Instant.normalize(&new)
         return new
     }
 
     public func add<T : SecondsRepresentableAmount>(amount: T) -> Instant {
         var new = self
-        new.seconds += amount.seconds
+        new.seconds += Seconds(amount)
         return new
     }
 
@@ -79,14 +79,14 @@ public struct Instant : Temporal {
 
     public func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
         var new = self
-        new.nanos -= amount.nanoSeconds
+        new.nanos -= NanoSeconds(amount)
         Instant.normalize(&new)
         return new
     }
 
     public func subtract<T : SecondsRepresentableAmount>(amount: T) -> Instant {
         var new = self
-        new.seconds -= amount.seconds
+        new.seconds -= Seconds(amount)
         return new
     }
 
@@ -105,13 +105,13 @@ public struct Instant : Temporal {
     /// Helper method to fix too many nano seconds
     private static func normalize(inout instant: Instant) {
 
-        if instant.nanos > 1_000_000 {
-            let seconds = Int64(instant.nanos) / 1_000_000
-            instant.seconds += seconds
-        } else if instant.nanos < 0 {
-            let seconds = instant.nanos / 1_000_000
-            instant.seconds += Int64(seconds)
-            instant.nanos -= (seconds * 1_000_000)
+        if instant.nanos.nanoSeconds > 1_000_000 {
+            let seconds = Int64(instant.nanos.nanoSeconds) / 1_000_000
+            instant.seconds += seconds.seconds
+        } else if instant.nanos.nanoSeconds < 0 {
+            let seconds = instant.nanos.nanoSeconds / 1_000_000
+            instant.seconds += seconds.seconds
+            instant.nanos -= (seconds * 1_000_000).nanoSeconds
         }
     }
 }

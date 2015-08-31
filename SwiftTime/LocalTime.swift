@@ -84,7 +84,11 @@ public func == (lhs: LocalTime, rhs: LocalTime) -> Bool {
 }
 
 public func < (lhs: LocalTime, rhs: LocalTime) -> Bool {
-    if lhs.secondsOfDay < rhs.secondsOfDay {
+    let lhsSec = lhs.secondsOfDay
+    let rhsSec = rhs.secondsOfDay
+    if lhsSec < rhsSec {
+        return true
+    } else if lhsSec == rhsSec {
         return lhs.nanos < rhs.nanos
     } else {
         return false

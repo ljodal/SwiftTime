@@ -147,7 +147,25 @@ public func -<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (l
 /// A protocol for time amounts that can be representated as a number of nano seconds
 ///
 public protocol NanoSecondsRepresentableAmount {
-    var nanoSeconds: Int32 { get }
+    var nanoSeconds: Int64 { get }
+}
+
+public extension NanoSecondsRepresentableAmount {
+    final func add<T : NanoSecondsRepresentableAmount>(other: T) -> NanoSeconds {
+        return NanoSeconds(self.nanoSeconds + other.nanoSeconds)
+    }
+
+    final func subtract<T : NanoSecondsRepresentableAmount>(other: T) -> NanoSeconds {
+        return NanoSeconds(self.nanoSeconds - other.nanoSeconds)
+    }
+}
+
+public func +<T : NanoSecondsRepresentableAmount, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> NanoSeconds {
+    return lhs.add(rhs)
+}
+
+public func -<T : NanoSecondsRepresentableAmount, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> NanoSeconds {
+    return lhs.subtract(rhs)
 }
 
 //
@@ -257,9 +275,9 @@ public struct Days : CountableAmount, DaysRepresentableAmount {
     }
 }
 
-/**
-A unit representing an hour
-*/
+///
+/// A unit representing an hour
+///
 public struct Hours : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
@@ -292,9 +310,9 @@ public struct Hours : CountableAmount, SecondsRepresentableAmount {
     }
 }
 
-/**
-A unit representing a minute
-*/
+///
+/// A unit representing a minute
+///
 public struct Minutes : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
@@ -326,15 +344,19 @@ public struct Minutes : CountableAmount, SecondsRepresentableAmount {
     }
 }
 
-/**
-A unit representing a second
-*/
+///
+/// A unit representing a second
+///
 public struct Seconds : CountableAmount, SecondsRepresentableAmount {
 
     public var count: Int64
 
     public init(_ count: Int64) {
         self.count = count
+    }
+
+    public init(_ amount: SecondsRepresentableAmount) {
+        self.count = amount.seconds
     }
 
     public var seconds: Int64 {
@@ -353,6 +375,43 @@ public struct Seconds : CountableAmount, SecondsRepresentableAmount {
     public func get(unit: TemporalUnit) throws -> Int64 {
         switch unit {
         case is Seconds:
+            return count
+        default:
+            throw DateTimeErrors.UnsupportedUnit
+        }
+    }
+}
+
+///
+/// A unit representing nano seconds
+///
+public struct NanoSeconds : CountableAmount, NanoSecondsRepresentableAmount {
+    public var count: Int64
+
+    public init(_ count: Int64) {
+        self.count = count
+    }
+
+    public init(_ amount: NanoSecondsRepresentableAmount) {
+        self.count = amount.nanoSeconds
+    }
+
+    public var nanoSeconds: Int64 {
+        return count
+    }
+
+    public func supports(field: TemporalUnit) -> Bool {
+        switch field {
+        case is NanoSeconds:
+            return true
+        default:
+            return false
+        }
+    }
+
+    public func get(unit: TemporalUnit) throws -> Int64 {
+        switch unit {
+        case is NanoSeconds:
             return count
         default:
             throw DateTimeErrors.UnsupportedUnit

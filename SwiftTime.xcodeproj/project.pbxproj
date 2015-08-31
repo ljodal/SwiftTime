@@ -23,6 +23,7 @@
 		16381BFA1B34AB3A00882BEF /* LocalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BF91B34AB3A00882BEF /* LocalDate.swift */; };
 		164E113B1B3758BC0000FD07 /* LocalTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E113A1B3758BC0000FD07 /* LocalTime.swift */; };
 		164E113D1B375D9F0000FD07 /* LocalTimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E113C1B375D9F0000FD07 /* LocalTimeTest.swift */; };
+		16A28B581B3C824F00C62664 /* LocalDateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A28B571B3C824F00C62664 /* LocalDateTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		16381BF91B34AB3A00882BEF /* LocalDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDate.swift; sourceTree = "<group>"; };
 		164E113A1B3758BC0000FD07 /* LocalTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalTime.swift; path = /Users/sigurd/Code/SwiftTime/SwiftTime/LocalTime.swift; sourceTree = "<absolute>"; };
 		164E113C1B375D9F0000FD07 /* LocalTimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTimeTest.swift; sourceTree = "<group>"; };
+		16A28B571B3C824F00C62664 /* LocalDateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDateTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				164E113C1B375D9F0000FD07 /* LocalTimeTest.swift */,
 				16381BD91B2F67C300882BEF /* SwiftTimeTests.swift */,
 				16381BDB1B2F67C300882BEF /* Info.plist */,
+				16A28B571B3C824F00C62664 /* LocalDateTest.swift */,
 			);
 			path = SwiftTimeTests;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				164E113D1B375D9F0000FD07 /* LocalTimeTest.swift in Sources */,
 				16381BDA1B2F67C300882BEF /* SwiftTimeTests.swift in Sources */,
+				16A28B581B3C824F00C62664 /* LocalDateTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

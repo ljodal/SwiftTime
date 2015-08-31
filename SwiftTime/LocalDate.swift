@@ -80,6 +80,24 @@ public struct LocalDate : ForwardIndexType, Comparable {
     }
 
     //
+    // MARK: Static helpers
+    //
+
+    ///
+    /// Get the maxiumum representable local date
+    ///
+    public static func max() -> LocalDate {
+        return LocalDate(Int64.max, 12, 31)
+    }
+
+    ///
+    /// Get the minimum representable local date
+    ///
+    public static func min() -> LocalDate {
+        return LocalDate(Int64.min, 1, 1)
+    }
+
+    //
     // MARK: Conversions
     //
 
@@ -156,6 +174,14 @@ public struct LocalDate : ForwardIndexType, Comparable {
         return LocalDate(y, m, d)
     }
 
+    public func add(p: Period) -> LocalDate {
+        return self + p.years + p.months + p.days
+    }
+
+    public func subtract(p: Period) -> LocalDate {
+        return self - p.years - p.months - p.days
+    }
+
     //
     // MARK: ForwardIndexType implementation
     //
@@ -189,10 +215,18 @@ public func + (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
     return lhs.add(rhs)
 }
 
+public func + (lhs: LocalDate, rhs: Period) -> LocalDate {
+    return lhs.add(rhs)
+}
+
 public func - (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
     return lhs.subtract(rhs)
 }
 
 public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
+    return lhs.subtract(rhs)
+}
+
+public func - (lhs: LocalDate, rhs: Period) -> LocalDate {
     return lhs.subtract(rhs)
 }

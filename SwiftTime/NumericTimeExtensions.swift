@@ -43,6 +43,12 @@ extension Int {
             return Seconds(Int64(self))
         }
     }
+
+    public var nanoSeconds: NanoSeconds {
+        get {
+            return NanoSeconds(Int64(self))
+        }
+    }
 }
 
 extension Int8 {
@@ -80,6 +86,12 @@ extension Int8 {
     public var seconds: Seconds {
         get {
             return Seconds(Int64(self))
+        }
+    }
+
+    public var nanoSeconds: NanoSeconds {
+        get {
+            return NanoSeconds(Int64(self))
         }
     }
 }
@@ -121,6 +133,12 @@ extension Int16 {
             return Seconds(Int64(self))
         }
     }
+
+    public var nanoSeconds: NanoSeconds {
+        get {
+            return NanoSeconds(Int64(self))
+        }
+    }
 }
 
 extension Int32 {
@@ -160,6 +178,12 @@ extension Int32 {
             return Seconds(Int64(self))
         }
     }
+
+    public var nanoSeconds: NanoSeconds {
+        get {
+            return NanoSeconds(Int64(self))
+        }
+    }
 }
 
 extension Int64 {
@@ -197,6 +221,12 @@ extension Int64 {
     public var seconds: Seconds {
         get {
             return Seconds(self)
+        }
+    }
+
+    public var nanoSeconds: NanoSeconds {
+        get {
+            return NanoSeconds(self)
         }
     }
 }

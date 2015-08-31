@@ -41,3 +41,11 @@ public struct TZ : TimeZone {
         return "UTC"
     }
 }
+
+//
+// MARK: Equatable implementation
+//
+
+public func == (lhs: TimeZone, rhs: TimeZone) -> Bool {
+    return lhs.name() == rhs.name()
+}

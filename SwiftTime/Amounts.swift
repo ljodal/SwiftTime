@@ -47,17 +47,22 @@ func /<T : TemporalAmountMath>(lhs: T, rhs: Int) -> T {
 An amount of time in seconds and nano seconds
 */
 public struct Duration : TemporalAmount {
-    public let seconds: Int64
-    public let nanoSeconds: Int32
+    public let seconds: Seconds
+    public let nanoSeconds: NanoSeconds
 
     public init(seconds: Int64, nanoSeconds: Int32) {
-        self.seconds = seconds
-        self.nanoSeconds = nanoSeconds
+        self.seconds = seconds.seconds
+        self.nanoSeconds = nanoSeconds.nanoSeconds
+    }
+
+    public init(seconds: SecondsRepresentableAmount, nanoSeconds: NanoSecondsRepresentableAmount) {
+        self.seconds = Seconds(seconds.seconds)
+        self.nanoSeconds = NanoSeconds(nanoSeconds.nanoSeconds)
     }
 
     public init() {
-        self.seconds = 0
-        self.nanoSeconds = 0
+        self.seconds = 0.seconds
+        self.nanoSeconds = 0.nanoSeconds
     }
 
     public func supports(field: TemporalUnit) -> Bool {
@@ -67,19 +72,25 @@ public struct Duration : TemporalAmount {
     public func get(unit: TemporalUnit) throws -> Int64 {
         switch unit {
         case is Seconds:
-            return seconds
+            return seconds.seconds
         default:
             throw DateTimeErrors.UnsupportedUnit
         }
     }
 
     public func add(other: Duration) -> Duration {
-        return Duration(seconds: self.seconds + other.seconds,
-            nanoSeconds: self.nanoSeconds + other.nanoSeconds)
+
+        var seconds = self.seconds.count + other.seconds.count
+        var nanos = self.nanoSeconds.count + other.nanoSeconds.count
+
+        seconds += nanos / 1_000_000
+        nanos -= nanos % 1_000_000
+
+        return Duration(seconds: seconds.seconds, nanoSeconds: nanos.nanoSeconds)
     }
 
     public func add<T : SecondsRepresentableAmount>(s: T) -> Duration {
-        return Duration(seconds: self.seconds + s.seconds, nanoSeconds: self.nanoSeconds)
+        return Duration(seconds: self.seconds + s, nanoSeconds: self.nanoSeconds)
     }
 }
 
@@ -87,15 +98,15 @@ public struct Duration : TemporalAmount {
 An amount of time in years, months, and days.
 */
 public struct Period : TemporalAmount {
-    public let years: Int64
-    public let months: Int64
-    public let days: Int64
+    public let years: Years
+    public let months: Months
+    public let days: Days
     public let duration: Duration
 
     public init(years: Int64, months: Int64, days: Int64) {
-        self.years = years
-        self.months = months
-        self.days = days
+        self.years = years.years
+        self.months = months.months
+        self.days = days.days
         self.duration = Duration()
     }
 
@@ -118,9 +129,9 @@ public struct Period : TemporalAmount {
             }
         }
 
-        self.years = 0
-        self.months = 0
-        self.days = 0
+        self.years = 0.years
+        self.months = 0.months
+        self.days = 0.days
         self.duration = duration
     }
 

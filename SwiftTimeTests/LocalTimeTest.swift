@@ -102,4 +102,25 @@ class LocalTimeTest: XCTestCase {
 
         XCTAssertFalse(t1..<t2 ~= t2)
     }
+
+    func testCompare1() {
+        let t1 = try! LocalTime(hour: 10, minute: 0, second: 0, nanos: 0)
+        let t2 = try! LocalTime(hour: 11, minute: 0, second: 0, nanos: 0)
+
+        XCTAssertTrue(t1 < t2)
+    }
+
+    func testCompare2() {
+        let t1 = try! LocalTime(hour: 10, minute: 0, second: 0, nanos: 0)
+        let t2 = try! LocalTime(hour: 10, minute: 0, second: 0, nanos: 0)
+
+        XCTAssertFalse(t1 < t2)
+    }
+
+    func testCompare3() {
+        let t1 = try! LocalTime(hour: 10, minute: 0, second: 0, nanos: 0)
+        let t2 = try! LocalTime(hour: 11, minute: 0, second: 0, nanos: 0)
+
+        XCTAssertFalse(t1 > t2)
+    }
 }
