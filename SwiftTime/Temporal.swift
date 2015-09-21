@@ -6,7 +6,15 @@
 //  Copyright © 2015 Sigurd Ljødal. All rights reserved.
 //
 
-public protocol Temporal : Equatable {
+public protocol Temporal {
+
+    ///
+    /// Get the number of milli seconds since the UNIX epoch
+    ///
+    func toMillis() -> Int64
+}
+
+public protocol TemporalMath : Equatable {
 
     //
     // Addition and subtraction
@@ -23,34 +31,34 @@ public protocol Temporal : Equatable {
     func subtract(amount: Period) -> Self
 }
 
-public func +<T : Temporal, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func +<T : TemporalMath, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
     return lhs.add(rhs)
 }
 
-public func +<T : Temporal, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func +<T : TemporalMath, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
     return lhs.add(rhs)
 }
 
-public func +<T : Temporal> (lhs: T, rhs: Duration) -> T {
+public func +<T : TemporalMath> (lhs: T, rhs: Duration) -> T {
     return lhs.add(rhs)
 }
 
-public func +<T : Temporal> (lhs: T, rhs: Period) -> T {
+public func +<T : TemporalMath> (lhs: T, rhs: Period) -> T {
     return lhs.add(rhs)
 }
 
-public func -<T : Temporal, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func -<T : TemporalMath, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
     return lhs.subtract(rhs)
 }
 
-public func -<T : Temporal, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func -<T : TemporalMath, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
     return lhs.subtract(rhs)
 }
 
-public func -<T : Temporal> (lhs: T, rhs: Duration) -> T {
+public func -<T : TemporalMath> (lhs: T, rhs: Duration) -> T {
     return lhs.subtract(rhs)
 }
 
-public func -<T : Temporal> (lhs: T, rhs: Period) -> T {
+public func -<T : TemporalMath> (lhs: T, rhs: Period) -> T {
     return lhs.subtract(rhs)
 }

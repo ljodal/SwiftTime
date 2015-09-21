@@ -13,20 +13,20 @@ public protocol TimeZone {
 
     /// Get the name of the time zone
     func name() -> String
+
+    /// Get the time of the next offset transition, if any
+    func nextTransition<T : Temporal>(temporal: T) -> T?
+
+    /// Get the time of the previous offset transition, if any
+    func prevTransition<T : Temporal>(temporal: T) -> T?
 }
 
 /// An implementation of the TimeZone protocol.
-public struct TZ : TimeZone {
+public struct UTC : TimeZone {
     
-    public static let UTC = try! TZ.get("UTC")
+    public static let instance = UTC()
 
-    /// Get the zone for the given name. If no such zone exists, an error is thrown
-    public static func get(name: String) throws -> TZ {
-        return TZ(name)
-    }
-
-    private init(_ name: String) {
-
+    private init() {
     }
 
     /// Get the offset from UTC at the time indicated by `temporal`
@@ -39,6 +39,14 @@ public struct TZ : TimeZone {
     /// Get the name of the time zone
     public func name() -> String {
         return "UTC"
+    }
+
+    public func nextTransition<T : Temporal>(temporal: T) -> T? {
+        return nil;
+    }
+
+    public func prevTransition<T : Temporal>(temporal: T) -> T? {
+        return nil;
     }
 }
 

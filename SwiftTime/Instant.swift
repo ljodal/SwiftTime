@@ -10,7 +10,7 @@
  * A struct that stores the number of nano seconds since
  * Unix Epoch (1970-01-01)
  */
-public struct Instant : Temporal {
+public struct Instant : Temporal, TemporalMath {
     public var seconds: Seconds
     public var nanos: NanoSeconds
     
@@ -31,7 +31,32 @@ public struct Instant : Temporal {
     }
 
     //
-    // Add
+    // MARK: Static initializers
+    //
+
+    ///
+    /// Get an instant that represents time right now
+    ///
+    public static func now() -> Instant {
+
+        var tv: timeval = timeval.init()
+        gettimeofday(&tv, nil)
+
+        let seconds = Int64(tv.tv_sec)
+        let nanos = Int32(tv.tv_usec * 1000)
+        return Instant(seconds: seconds, nanos: nanos)
+    }
+
+    //
+    // MARK: Get
+    //
+
+    public func toMillis() -> Int64 {
+        return (seconds.count * 1_000) + (nanos.count / 1_000_000)
+    }
+
+    //
+    // MARK: Add
     //
 
     public func add(amount: Duration) -> Instant {
@@ -44,7 +69,7 @@ public struct Instant : Temporal {
 
     // TODO: Implement
     public func add(amount: Period) -> Instant {
-        abort()
+        fatalError("Method not implemented yet")
     }
 
     public func add<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
@@ -61,7 +86,7 @@ public struct Instant : Temporal {
     }
 
     //
-    // Subtract
+    // MARK: Subtract
     //
 
     public func subtract(amount: Duration) -> Instant {
@@ -74,7 +99,7 @@ public struct Instant : Temporal {
 
     // TODO: Implement
     public func subtract(amount: Period) -> Instant {
-        abort()
+        fatalError("Method not implemented yet")
     }
 
     public func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
@@ -99,7 +124,7 @@ public struct Instant : Temporal {
         //let daysSinceEpoch = self.seconds / 84_600
         //let secondsInDay = self.seconds % 64_600
 
-        abort()
+        fatalError("Method not implemented yet")
     }
 
     /// Helper method to fix too many nano seconds
