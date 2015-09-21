@@ -6,8 +6,6 @@
 //  Copyright © 2015 Sigurd Ljødal. All rights reserved.
 //
 
-import Darwin
-
 ///
 /// A protocol for chronoology helpers
 ///
@@ -23,7 +21,13 @@ internal protocol Chronology {
     func isLeapYear(year: Int64) -> Bool
 
     /// Get the number of days in the given month of the given year
-    func daysInMonth(month: Int8, year: Int64) -> Int8
+    func daysInMonth(month month: Int8, year: Int64) -> Int8
+
+    /// Get the number of seconds since the epoch, given the arguments
+    func toEpoch(year year: Int64, month: Int8, day: Int8) -> Int64
+
+    /// Get the components from the given seconds since the epoch
+    func fromEpoch(seconds: Int64) -> (Int64, Int8, Int8)
 }
 
 internal class ISOChronology : Chronology {
@@ -36,12 +40,14 @@ internal class ISOChronology : Chronology {
     private let minFirstDayOfMonth: [Int64] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334]
     private let maxFirstDayOfMonth: [Int64] = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335]
 
-    internal init() {}
+    internal static let instance = ISOChronology()
+
+    private init() {}
 
     ///
     /// Get the number of days in the given month
     ///
-    internal func daysInMonth(month: Int8, year: Int64) -> Int8 {
+    internal func daysInMonth(month month: Int8, year: Int64) -> Int8 {
         if (isLeapYear(year)) {
             return maxDaysInMonth[month - 1]
         } else {
@@ -156,7 +162,7 @@ internal class ISOChronology : Chronology {
     ///
     /// Get the number of years in the given year
     ///
-    internal func daysIn(year year: Int64) -> Int {
+    internal func daysIn(year year: Int64) -> Int64 {
         return isLeapYear(year) ? 366 : 365
     }
 
@@ -211,7 +217,7 @@ internal class ISOChronology : Chronology {
     ///
     /// Get the number of seconds since the Unix Epoch (1970-01-01)
     ///
-    internal func toEpoch(year: Int64, month: Int8, day: Int8) -> Int64 {
+    internal func toEpoch(year year: Int64, month: Int8, day: Int8) -> Int64 {
         var days: Int64 = 0
 
         // Add days from 1970 to the given year
@@ -223,5 +229,55 @@ internal class ISOChronology : Chronology {
 
         // Number of days in seconds
         return days * 86_400
+    }
+
+    ///
+    /// Get the date components from the given number of seconds since
+    /// the Unix Epoch (1970-01-01)
+    ///
+    internal func fromEpoch(var seconds: Int64) -> (Int64, Int8, Int8) {
+
+        // If seconds is less than 0, we must subtract 86 399 seconds.
+        // This makes sure that the division below return the correct
+        // day, as any number of seconds except the first of a day will
+        // otherwise be counted in the next day.
+        if seconds < 0 {
+            seconds -= 86_399
+        }
+
+        // Get the number of whole days
+        var days: Int64 = seconds / Int64(86_400)
+
+        // Estimate the year we end up in based on the number of days
+        var year = estimatedYears(days: days) + 1970
+
+        // Calculate the actual number of days in the estimated number
+        // of months. This helps us calculate the exact date we end at
+        if year < 1970 {
+            days -= daysBetween(from: year, to: 1970)
+        } else {
+            days -= daysBetween(from: 1970, to: year)
+        }
+
+        // Get the number of days in the estimated year
+        let daysInYear = daysIn(year: year)
+
+        // Days should be counted from 1, not 0
+        days += 1
+
+        // Check that we are within the bounds of the given year
+        if days < 1 {
+            year -= 1
+            days = daysInYear + days
+        } else if days > daysInYear {
+            year += 1
+            days = days - daysInYear
+        }
+
+        // Get the month and day
+        let (month, day) = fromOrdinal(year: year, days: days)
+
+        // Return components
+        return (year, month, day)
     }
 }

@@ -29,13 +29,13 @@ public struct LocalDate : ForwardIndexType, Comparable {
     /// Initializer that validates the input.
     ///
     public init(year: Int64, month: Int8, day: Int8) throws {
-        let chronology = ISOChronology()
+        let chronology = ISOChronology.instance
 
         guard 1...12 ~= month else {
             throw DateTimeErrors.InvalidDate(message: "Invalid month: \(month)")
         }
 
-        guard 1...chronology.daysInMonth(month, year: year) ~= day else {
+        guard 1...chronology.daysInMonth(month: month, year: year) ~= day else {
             throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(month)-\(day)")
         }
 
@@ -51,10 +51,10 @@ public struct LocalDate : ForwardIndexType, Comparable {
     /// a valid date, and error is thrown.
     ///
     public init(year: Int64, dayOfYear: Int) throws {
-        let chronology = ISOChronology()
+        let chronology = ISOChronology.instance
 
         // Validate that the given ordinal day is valid
-        guard dayOfYear > 0 && dayOfYear <= chronology.daysIn(year: year) else {
+        guard dayOfYear > 0 && Int64(dayOfYear) <= chronology.daysIn(year: year) else {
             throw DateTimeErrors.InvalidDate(message: "Invalid date: \(year)-\(dayOfYear)")
         }
 
@@ -76,7 +76,7 @@ public struct LocalDate : ForwardIndexType, Comparable {
         self.year = year
         self.month = month
         self.day = day
-        self.chronology = ISOChronology()
+        self.chronology = ISOChronology.instance
     }
 
     //
@@ -105,7 +105,7 @@ public struct LocalDate : ForwardIndexType, Comparable {
     /// Get the Unix time at midnight
     ///
     public func toUnixTime() -> Int64 {
-        return chronology.toEpoch(year, month: month, day: day)
+        return chronology.toEpoch(year: year, month: month, day: day)
     }
 
     //
@@ -141,7 +141,7 @@ public struct LocalDate : ForwardIndexType, Comparable {
         // If the day is larger than the last day of the month, we snap
         // to the last day of the month
         var day = self.day
-        let last = chronology.daysInMonth(Int8(months), year: years)
+        let last = chronology.daysInMonth(month: Int8(months), year: years)
         if day > last {
             day = last
         }

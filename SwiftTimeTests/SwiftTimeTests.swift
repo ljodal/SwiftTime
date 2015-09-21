@@ -268,69 +268,6 @@ class SwiftTimeTests: XCTestCase {
         }
     }
 
-    func testLeapYearsBetween1() {
-        let c = ISOChronology()
-        let leaps = c.leapYears(from: 2000, to: 2016)
-        XCTAssertEqual(leaps, 4, "Expected 4 leap years, was: \(leaps)")
-    }
-
-    func testLeapYearsBetween2() {
-        let c = ISOChronology()
-        let leaps = c.leapYears(from: -2016, to: -2000)
-        XCTAssertEqual(leaps, 4, "Expected 4 leap years, was: \(leaps)")
-    }
-
-    func testLeapYearsBetween3() {
-        let c = ISOChronology()
-        let leaps = c.leapYears(from: 0, to: 400)
-        XCTAssertEqual(leaps, 97, "Expected 97 leap years, was: \(leaps)")
-    }
-
-    func testOrdinal1() {
-        let c = ISOChronology()
-        let (y, m, d) = c.ordinalDay(year: 2015, days: 366)
-
-        XCTAssertEqual(y, 2016)
-        XCTAssertEqual(m, 1)
-        XCTAssertEqual(d, 1)
-    }
-
-    func testOrdinal2() {
-        let c = ISOChronology()
-        let (y, m, d) = c.ordinalDay(year: 2015, days: 0)
-
-        XCTAssertEqual(y, 2014)
-        XCTAssertEqual(m, 12)
-        XCTAssertEqual(d, 31)
-    }
-
-    func testOrdinal3() {
-        let c = ISOChronology()
-        let (y, m, d) = c.ordinalDay(year: 2015, days: -1)
-
-        XCTAssertEqual(y, 2014)
-        XCTAssertEqual(m, 12)
-        XCTAssertEqual(d, 30)
-    }
-
-    func testOrdinal4() {
-        let c = ISOChronology()
-        let (y, m, d) = c.ordinalDay(year: 2010, days: 59)
-
-        XCTAssertEqual(y, 2010)
-        XCTAssertEqual(m, 2)
-        XCTAssertEqual(d, 28)
-    }
-
-    func testOrdinal5() {
-        let c = ISOChronology()
-        let (y, m, d) = c.ordinalDay(year: 2010, days: 60)
-
-        XCTAssertEqual(y, 2010)
-        XCTAssertEqual(m, 3)
-        XCTAssertEqual(d, 1)
-    }
-
     func testToUnixTime1() {
         let d1 = try! LocalDate(year: 2015, month: 1, day: 1)
 
