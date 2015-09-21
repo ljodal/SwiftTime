@@ -6,7 +6,13 @@
 //  Copyright © 2015 Sigurd Ljødal. All rights reserved.
 //
 
-public struct DateTime : Temporal, TemporalMath {
+public protocol DateTimeConvertible {
+
+    /// Get the date time representation of this object
+    func toDateTime() -> DateTime
+}
+
+public struct DateTime : Temporal {
 
     public var date: LocalDate
     public var time: LocalTime
@@ -39,6 +45,15 @@ public struct DateTime : Temporal, TemporalMath {
     public func toMillis() -> Int64 {
         return date.toUnixTime()
     }
+}
+
+extension DateTime : DateTimeConvertible {
+    public func toDateTime() -> DateTime {
+        return self
+    }
+}
+
+extension DateTime : TemporalMath {
 
     //
     // MARK: Arithmic
