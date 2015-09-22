@@ -94,3 +94,13 @@ public func < (lhs: LocalTime, rhs: LocalTime) -> Bool {
         return false
     }
 }
+
+//
+// MARK: Debug string implementation
+//
+
+extension LocalTime : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return String(format: "%02d:%02d:%02d.%08d", hour, minute, second, nanos)
+    }
+}

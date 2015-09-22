@@ -230,3 +230,13 @@ public func - (lhs: LocalDate, rhs: DayType) -> LocalDate {
 public func - (lhs: LocalDate, rhs: Period) -> LocalDate {
     return lhs.subtract(rhs)
 }
+
+//
+// MARK: Debug string
+//
+
+extension LocalDate : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return String(format: "%04d-%02d-%02d", year, month, day)
+    }
+}

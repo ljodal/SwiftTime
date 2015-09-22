@@ -102,3 +102,9 @@ extension DateTime : TemporalMath {
 public func == (lhs: DateTime, rhs: DateTime) -> Bool {
     return lhs.date == rhs.date && lhs.time == rhs.time && lhs.zone == rhs.zone
 }
+
+extension DateTime : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "\(date.debugDescription)T\(time.debugDescription)";
+    }
+}

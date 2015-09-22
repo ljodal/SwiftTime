@@ -26,8 +26,8 @@ class SwiftTimeTests: XCTestCase {
         let d1 = Instant(seconds: 123)
         let d2 = d1 + 123.seconds
         
-        XCTAssertEqual(d2.seconds.count, 246)
-        XCTAssertEqual(d2.nanos.count, 0)
+        XCTAssertEqual(d2.seconds, 246)
+        XCTAssertEqual(d2.nanos, 0)
     }
     
     func testEquals() {
