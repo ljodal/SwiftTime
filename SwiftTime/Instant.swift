@@ -72,14 +72,14 @@ public struct Instant : Temporal, TemporalMath {
         fatalError("Method not implemented yet")
     }
 
-    public func add<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
+    public func add<T : NanoSecondType>(amount: T) -> Instant {
         var new = self
         new.nanos += NanoSeconds(amount)
         Instant.normalize(&new)
         return new
     }
 
-    public func add<T : SecondsRepresentableAmount>(amount: T) -> Instant {
+    public func add<T : SecondType>(amount: T) -> Instant {
         var new = self
         new.seconds += Seconds(amount)
         return new
@@ -102,14 +102,14 @@ public struct Instant : Temporal, TemporalMath {
         fatalError("Method not implemented yet")
     }
 
-    public func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> Instant {
+    public func subtract<T : NanoSecondType>(amount: T) -> Instant {
         var new = self
         new.nanos -= NanoSeconds(amount)
         Instant.normalize(&new)
         return new
     }
 
-    public func subtract<T : SecondsRepresentableAmount>(amount: T) -> Instant {
+    public func subtract<T : SecondType>(amount: T) -> Instant {
         var new = self
         new.seconds -= Seconds(amount)
         return new

@@ -20,22 +20,22 @@ public protocol TemporalMath : Equatable {
     // Addition and subtraction
     //
 
-    func add<T : SecondsRepresentableAmount> (amount: T) -> Self
-    func add<T : NanoSecondsRepresentableAmount> (amount: T) -> Self
+    func add<T : SecondType> (amount: T) -> Self
+    func add<T : NanoSecondType> (amount: T) -> Self
     func add(amount: Duration) -> Self
     func add(amount: Period) -> Self
 
-    func subtract<T : SecondsRepresentableAmount>(amount: T) -> Self
-    func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> Self
+    func subtract<T : SecondType>(amount: T) -> Self
+    func subtract<T : NanoSecondType>(amount: T) -> Self
     func subtract(amount: Duration) -> Self
     func subtract(amount: Period) -> Self
 }
 
-public func +<T : TemporalMath, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func +<T : TemporalMath, U : SecondType> (lhs: T, rhs: U) -> T {
     return lhs.add(rhs)
 }
 
-public func +<T : TemporalMath, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func +<T : TemporalMath, U : NanoSecondType> (lhs: T, rhs: U) -> T {
     return lhs.add(rhs)
 }
 
@@ -47,11 +47,11 @@ public func +<T : TemporalMath> (lhs: T, rhs: Period) -> T {
     return lhs.add(rhs)
 }
 
-public func -<T : TemporalMath, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func -<T : TemporalMath, U : SecondType> (lhs: T, rhs: U) -> T {
     return lhs.subtract(rhs)
 }
 
-public func -<T : TemporalMath, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> T {
+public func -<T : TemporalMath, U : NanoSecondType> (lhs: T, rhs: U) -> T {
     return lhs.subtract(rhs)
 }
 

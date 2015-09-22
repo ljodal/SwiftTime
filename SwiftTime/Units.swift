@@ -20,7 +20,7 @@ public protocol TemporalUnit {
 /// A protocol for time deltas that are represented by a count of a single unit.
 /// E.g. 5 hours or 10 minutes
 ///
-public protocol CountableAmount : TemporalAmountMath, Equatable {
+public protocol CountableType : TemporalAmountMath, Equatable {
     /// The count that this time delta contains
     var count: Int64 { get set }
 
@@ -28,63 +28,63 @@ public protocol CountableAmount : TemporalAmountMath, Equatable {
     init(_ count: Int64)
 }
 
-public func ==<T : CountableAmount>(lhs: T, rhs: T) -> Bool {
+public func ==<T : CountableType>(lhs: T, rhs: T) -> Bool {
     return lhs.count == rhs.count
 }
 
-public func +<T : CountableAmount>(lhs: T, rhs: T) -> T {
+public func +<T : CountableType>(lhs: T, rhs: T) -> T {
     return lhs.add(rhs)
 }
 
-public func +<T : CountableAmount>(lhs: Int, rhs: T) -> T {
+public func +<T : CountableType>(lhs: Int, rhs: T) -> T {
     return rhs.add(T(Int64(lhs)))
 }
 
-public func +<T : CountableAmount>(lhs: T, rhs: Int) -> T {
+public func +<T : CountableType>(lhs: T, rhs: Int) -> T {
     return lhs.add(T(Int64(rhs)))
 }
 
-public func -<T : CountableAmount>(lhs: T, rhs: T) -> T {
+public func -<T : CountableType>(lhs: T, rhs: T) -> T {
     return lhs.subtract(rhs)
 }
 
-public func -<T : CountableAmount>(lhs: Int, rhs: T) -> T {
+public func -<T : CountableType>(lhs: Int, rhs: T) -> T {
     return rhs.subtract(T(Int64(lhs)))
 }
 
-public func -<T : CountableAmount>(lhs: T, rhs: Int) -> T {
+public func -<T : CountableType>(lhs: T, rhs: Int) -> T {
     return lhs.subtract(T(Int64(rhs)))
 }
 
-public func *<T : CountableAmount>(lhs: T, rhs: Int) -> T {
+public func *<T : CountableType>(lhs: T, rhs: Int) -> T {
     return lhs.multiply(rhs)
 }
 
-public func /<T : CountableAmount>(lhs: T, rhs: Int) -> T {
+public func /<T : CountableType>(lhs: T, rhs: Int) -> T {
     return lhs.divide(rhs)
 }
 
-public func +=<T : CountableAmount>(inout lhs: T, rhs: T) {
+public func +=<T : CountableType>(inout lhs: T, rhs: T) {
     lhs.count += rhs.count
 }
 
-public func -=<T : CountableAmount>(inout lhs: T, rhs: T) {
+public func -=<T : CountableType>(inout lhs: T, rhs: T) {
     lhs.count -= rhs.count
 }
 
-public func /=<T : CountableAmount>(inout lhs: T, divider: Int) {
+public func /=<T : CountableType>(inout lhs: T, divider: Int) {
     lhs.count /= Int64(divider)
 }
 
-public func *=<T : CountableAmount>(inout lhs: T, factor: Int) {
+public func *=<T : CountableType>(inout lhs: T, factor: Int) {
     lhs.count *= Int64(factor)
 }
 
-public prefix func - <T : CountableAmount>(amount: T) -> T {
+public prefix func - <T : CountableType>(amount: T) -> T {
     return T(-amount.count)
 }
 
-public extension CountableAmount {
+public extension CountableType {
     final func add(other: Self) -> Self {
         return Self(self.count + other.count)
     }
@@ -105,7 +105,7 @@ public extension CountableAmount {
 ///
 /// A protocol for time amounts that can be represented as a number of months
 ///
-public protocol MonthsRepresentableAmount {
+public protocol MonthType {
     var months: Int64 { get }
 }
 
@@ -113,7 +113,7 @@ public protocol MonthsRepresentableAmount {
 ///
 /// A protocol for time amounts that can be represented as a number of days
 ///
-public protocol DaysRepresentableAmount {
+public protocol DayType {
     var days: Int64 { get }
 }
 
@@ -121,50 +121,50 @@ public protocol DaysRepresentableAmount {
 ///
 /// A protocol for time amounts that can be representated as a number of seconds
 ///
-public protocol SecondsRepresentableAmount {
+public protocol SecondType {
     var seconds: Int64 { get }
 }
 
-public extension SecondsRepresentableAmount {
-    final func add<T : SecondsRepresentableAmount>(other: T) -> Seconds {
+public extension SecondType {
+    final func add<T : SecondType>(other: T) -> Seconds {
         return Seconds(self.seconds + other.seconds)
     }
 
-    final func subtract<T : SecondsRepresentableAmount>(other: T) -> Seconds {
+    final func subtract<T : SecondType>(other: T) -> Seconds {
         return Seconds(self.seconds - other.seconds)
     }
 }
 
-public func +<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> Seconds {
+public func +<T : SecondType, U : SecondType> (lhs: T, rhs: U) -> Seconds {
     return lhs.add(rhs)
 }
 
-public func -<T : SecondsRepresentableAmount, U : SecondsRepresentableAmount> (lhs: T, rhs: U) -> Seconds {
+public func -<T : SecondType, U : SecondType> (lhs: T, rhs: U) -> Seconds {
     return lhs.subtract(rhs)
 }
 
 ///
 /// A protocol for time amounts that can be representated as a number of nano seconds
 ///
-public protocol NanoSecondsRepresentableAmount {
+public protocol NanoSecondType {
     var nanoSeconds: Int64 { get }
 }
 
-public extension NanoSecondsRepresentableAmount {
-    final func add<T : NanoSecondsRepresentableAmount>(other: T) -> NanoSeconds {
+public extension NanoSecondType {
+    final func add<T : NanoSecondType>(other: T) -> NanoSeconds {
         return NanoSeconds(self.nanoSeconds + other.nanoSeconds)
     }
 
-    final func subtract<T : NanoSecondsRepresentableAmount>(other: T) -> NanoSeconds {
+    final func subtract<T : NanoSecondType>(other: T) -> NanoSeconds {
         return NanoSeconds(self.nanoSeconds - other.nanoSeconds)
     }
 }
 
-public func +<T : NanoSecondsRepresentableAmount, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> NanoSeconds {
+public func +<T : NanoSecondType, U : NanoSecondType> (lhs: T, rhs: U) -> NanoSeconds {
     return lhs.add(rhs)
 }
 
-public func -<T : NanoSecondsRepresentableAmount, U : NanoSecondsRepresentableAmount> (lhs: T, rhs: U) -> NanoSeconds {
+public func -<T : NanoSecondType, U : NanoSecondType> (lhs: T, rhs: U) -> NanoSeconds {
     return lhs.subtract(rhs)
 }
 
@@ -175,7 +175,7 @@ public func -<T : NanoSecondsRepresentableAmount, U : NanoSecondsRepresentableAm
 ///
 /// A unit representing a number of years
 ///
-public struct Years: CountableAmount, MonthsRepresentableAmount {
+public struct Years: CountableType, MonthType {
 
     public var count: Int64
 
@@ -209,7 +209,7 @@ public struct Years: CountableAmount, MonthsRepresentableAmount {
 ///
 /// A unit representing a number of months
 ///
-public struct Months: CountableAmount, MonthsRepresentableAmount {
+public struct Months: CountableType, MonthType {
 
     public var count: Int64
 
@@ -244,7 +244,7 @@ public struct Months: CountableAmount, MonthsRepresentableAmount {
 ///
 /// A unit representing a number of days
 ///
-public struct Days : CountableAmount, DaysRepresentableAmount {
+public struct Days : CountableType, DayType {
 
     public var count: Int64
 
@@ -278,7 +278,7 @@ public struct Days : CountableAmount, DaysRepresentableAmount {
 ///
 /// A unit representing an hour
 ///
-public struct Hours : CountableAmount, SecondsRepresentableAmount {
+public struct Hours : CountableType, SecondType {
 
     public var count: Int64
 
@@ -313,7 +313,7 @@ public struct Hours : CountableAmount, SecondsRepresentableAmount {
 ///
 /// A unit representing a minute
 ///
-public struct Minutes : CountableAmount, SecondsRepresentableAmount {
+public struct Minutes : CountableType, SecondType {
 
     public var count: Int64
 
@@ -347,7 +347,7 @@ public struct Minutes : CountableAmount, SecondsRepresentableAmount {
 ///
 /// A unit representing a second
 ///
-public struct Seconds : CountableAmount, SecondsRepresentableAmount {
+public struct Seconds : CountableType, SecondType {
 
     public var count: Int64
 
@@ -355,7 +355,7 @@ public struct Seconds : CountableAmount, SecondsRepresentableAmount {
         self.count = count
     }
 
-    public init(_ amount: SecondsRepresentableAmount) {
+    public init(_ amount: SecondType) {
         self.count = amount.seconds
     }
 
@@ -385,14 +385,14 @@ public struct Seconds : CountableAmount, SecondsRepresentableAmount {
 ///
 /// A unit representing nano seconds
 ///
-public struct NanoSeconds : CountableAmount, NanoSecondsRepresentableAmount {
+public struct NanoSeconds : CountableType, NanoSecondType {
     public var count: Int64
 
     public init(_ count: Int64) {
         self.count = count
     }
 
-    public init(_ amount: NanoSecondsRepresentableAmount) {
+    public init(_ amount: NanoSecondType) {
         self.count = amount.nanoSeconds
     }
 

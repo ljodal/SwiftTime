@@ -55,7 +55,7 @@ public struct Duration : TemporalAmount {
         self.nanoSeconds = nanoSeconds.nanoSeconds
     }
 
-    public init(seconds: SecondsRepresentableAmount, nanoSeconds: NanoSecondsRepresentableAmount) {
+    public init(seconds: SecondType, nanoSeconds: NanoSecondType) {
         self.seconds = Seconds(seconds.seconds)
         self.nanoSeconds = NanoSeconds(nanoSeconds.nanoSeconds)
     }
@@ -89,7 +89,7 @@ public struct Duration : TemporalAmount {
         return Duration(seconds: seconds.seconds, nanoSeconds: nanos.nanoSeconds)
     }
 
-    public func add<T : SecondsRepresentableAmount>(s: T) -> Duration {
+    public func add<T : SecondType>(s: T) -> Duration {
         return Duration(seconds: self.seconds + s, nanoSeconds: self.nanoSeconds)
     }
 }

@@ -116,7 +116,7 @@ public struct LocalDate : ForwardIndexType, Comparable {
     ///
     /// Subtract the given amount of months from this date
     ///
-    public func subtract(d: MonthsRepresentableAmount) -> LocalDate {
+    public func subtract(d: MonthType) -> LocalDate {
         return add(Months(-d.months))
     }
 
@@ -126,7 +126,7 @@ public struct LocalDate : ForwardIndexType, Comparable {
     /// - Note: If the current day does not exist in the resulting month,
     ///         the last day of the resulting month is used
     ///
-    public func add(m: MonthsRepresentableAmount) -> LocalDate {
+    public func add(m: MonthType) -> LocalDate {
         var months = Int64(self.month) + m.months
         let addYears = (months / 12)
         var years = self.year + addYears
@@ -152,14 +152,14 @@ public struct LocalDate : ForwardIndexType, Comparable {
     ///
     /// Subtract the given amount of days from this date
     ///
-    public func subtract(d: DaysRepresentableAmount) -> LocalDate {
+    public func subtract(d: DayType) -> LocalDate {
         return add(Days(-d.days))
     }
 
     ///
     /// Add the given amount of days to this date
     ///
-    public func add(d: DaysRepresentableAmount) -> LocalDate {
+    public func add(d: DayType) -> LocalDate {
         // Get the ordinal day or the year, and add the given number of days
         // to that.
         var day = chronology.ordinalDay(year: self.year, month: month, day: self.day)
@@ -207,11 +207,11 @@ public func <(lhs: LocalDate, rhs: LocalDate) -> Bool {
 // MARK: Aritmethric Operators
 //
 
-public func + (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
+public func + (lhs: LocalDate, rhs: MonthType) -> LocalDate {
     return lhs.add(rhs)
 }
 
-public func + (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
+public func + (lhs: LocalDate, rhs: DayType) -> LocalDate {
     return lhs.add(rhs)
 }
 
@@ -219,11 +219,11 @@ public func + (lhs: LocalDate, rhs: Period) -> LocalDate {
     return lhs.add(rhs)
 }
 
-public func - (lhs: LocalDate, rhs: MonthsRepresentableAmount) -> LocalDate {
+public func - (lhs: LocalDate, rhs: MonthType) -> LocalDate {
     return lhs.subtract(rhs)
 }
 
-public func - (lhs: LocalDate, rhs: DaysRepresentableAmount) -> LocalDate {
+public func - (lhs: LocalDate, rhs: DayType) -> LocalDate {
     return lhs.subtract(rhs)
 }
 

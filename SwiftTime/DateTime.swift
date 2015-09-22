@@ -59,12 +59,12 @@ extension DateTime : TemporalMath {
     // MARK: Arithmic
     //
 
-    public func add<T : NanoSecondsRepresentableAmount>(amount: T) -> DateTime {
+    public func add<T : NanoSecondType>(amount: T) -> DateTime {
         // TODO: Implement
         fatalError("Method not implemented")
     }
 
-    public func add<T : SecondsRepresentableAmount>(amount: T) -> DateTime {
+    public func add<T : SecondType>(amount: T) -> DateTime {
         // TODO: Implement
         fatalError("Method not implemented")
     }
@@ -78,12 +78,12 @@ extension DateTime : TemporalMath {
         return DateTime(date: date + amount, time: time, zone: zone)
     }
 
-    public func subtract<T : NanoSecondsRepresentableAmount>(amount: T) -> DateTime {
+    public func subtract<T : NanoSecondType>(amount: T) -> DateTime {
         // TODO: Implement
         fatalError("Method not implemented")
     }
 
-    public func subtract<T : SecondsRepresentableAmount>(amount: T) -> DateTime {
+    public func subtract<T : SecondType>(amount: T) -> DateTime {
         // TODO: Implement
         fatalError("Method not implemented")
     }
