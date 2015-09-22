@@ -14,27 +14,72 @@ public protocol DateTimeConvertible {
 
 public struct DateTime : Temporal {
 
-    public var date: LocalDate
-    public var time: LocalTime
+    //
+    // MARK: Instance variables
+    //
+
+    public var year: Int64
+    public var month: Int8
+    public var day: Int8
+
+    public var hours: Int8
+    public var minutes: Int8
+    public var seconds: Int8
+    public var nanoSeconds: Int32
+
+    public var offset: Int32
+
     public var zone: TimeZone
 
+    internal let chronology: Chronology
+
     //
-    // Mark: Initializers
+    // MARK: Initializers
     //
     
     public init (
-        year: Int64 = 0, month: Int8 = 1, date: Int8 = 1,
-        hours: Int8 = 0, minutes: Int8 = 0, seconds: Int8 = 0, nanos: Int32 = 0,
+        year: Int64 = 0, month: Int8 = 1, day: Int8 = 1,
+        hours: Int8 = 0, minutes: Int8 = 0, seconds: Int8 = 0, nanoSeconds: Int32 = 0,
         zone: TimeZone = UTC.instance) throws
     {
-        self.date = try LocalDate(year: year, month: month, day: date)
-        self.time = try LocalTime(hour: hours, minute: minutes, second: seconds, nanos: nanos)
+        self.chronology = ISOChronology.instance
+
+        // Validate that the input arguments are valid
+        try self.chronology.validate(year, month, day, hours, minutes, seconds, nanoSeconds)
+
+        self.year = year
+        self.month = month
+        self.day = day
+
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
+        self.nanoSeconds = nanoSeconds
+
+        self.offset = 0 // TODO: Calculate actual offset
+
         self.zone = zone
     }
 
-    public init (date: LocalDate, time: LocalTime, zone: TimeZone = UTC.instance) {
-        self.date = date
-        self.time = time
+    /// Internal non-validating initializer
+    internal init(
+        _ year: Int64 = 0, _ month: Int8 = 1, _ day: Int8 = 1,
+        _ hours: Int8 = 0, _ minutes: Int8 = 0, _ seconds: Int8 = 0, _ nanos: Int32 = 0,
+        _ offset: Int32, _ zone: TimeZone = UTC.instance)
+    {
+        self.chronology = ISOChronology.instance
+
+        self.year = year
+        self.month = month
+        self.day = day
+
+        self.hours = hours
+        self.minutes = minutes
+        self.seconds = seconds
+        self.nanoSeconds = nanos
+
+        self.offset = offset
+        
         self.zone = zone
     }
 
@@ -43,7 +88,13 @@ public struct DateTime : Temporal {
     //
 
     public func toMillis() -> Int64 {
-        return date.toUnixTime()
+        var seconds: Int64 = 0
+        seconds += chronology.toEpoch(year: year, month: month, day: day)
+        seconds += Int64(hours) * 3600
+        seconds += Int64(minutes) * 60
+        seconds += Int64(seconds)
+
+        return seconds * 1000 + Int64(nanoSeconds) / 1000 - Int64(offset)
     }
 }
 
@@ -75,7 +126,8 @@ extension DateTime : TemporalMath {
     }
 
     public func add(amount: Period) -> DateTime {
-        return DateTime(date: date + amount, time: time, zone: zone)
+        // TODO: Implement
+        fatalError("Method not implemented")
     }
 
     public func subtract<T : NanoSecondType>(amount: T) -> DateTime {
@@ -100,11 +152,16 @@ extension DateTime : TemporalMath {
 }
 
 public func == (lhs: DateTime, rhs: DateTime) -> Bool {
-    return lhs.date == rhs.date && lhs.time == rhs.time && lhs.zone == rhs.zone
+    return (
+        lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day &&
+        lhs.hours == rhs.hours && lhs.minutes == rhs.minutes && lhs.seconds == rhs.seconds &&
+        lhs.nanoSeconds == rhs.nanoSeconds && lhs.offset == rhs.offset
+    )
 }
 
 extension DateTime : CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "\(date.debugDescription)T\(time.debugDescription)";
+        return String(format: "%04d-%02d-%02dT%02d:%02d:%02d.%09d",
+            year, month, day, hours, minutes, seconds, nanoSeconds)
     }
 }

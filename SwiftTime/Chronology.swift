@@ -28,6 +28,10 @@ internal protocol Chronology {
 
     /// Get the components from the given seconds since the epoch
     func fromEpoch(seconds: Int64) -> (Int64, Int8, Int8)
+
+    /// Validate that this is a valid combination of components
+    func validate(year: Int64, _ month: Int8, _ day: Int8,
+        _ hours: Int8, _ minutes: Int8, _ seconds: Int8, _ nanos: Int32) throws;
 }
 
 internal class ISOChronology : Chronology {
@@ -279,5 +283,35 @@ internal class ISOChronology : Chronology {
 
         // Return components
         return (year, month, day)
+    }
+
+    /// Validate that the given components are valid
+    internal func validate(year: Int64, _ month: Int8, _ day: Int8,
+        _ hours: Int8, _ minutes: Int8, _ seconds: Int8, _ nanos: Int32) throws
+    {
+        guard 1...12 ~= month else {
+            throw DateTimeErrors.InvalidDate(message: "Invalid month: \(month)")
+        }
+
+        guard 1...daysInMonth(month: month, year: year) ~= day else {
+            throw DateTimeErrors.InvalidDate(message: String(
+                format: "Invalid date: %04d-%02d-%02d", year, month, day))
+        }
+
+        guard 0...23 ~= hours else {
+            throw DateTimeErrors.InvalidTime(message: "Invalid hour: \(hours)")
+        }
+
+        guard 0...59 ~= minutes else {
+            throw DateTimeErrors.InvalidTime(message: "Invalid minute: \(minutes)")
+        }
+
+        guard 0...59 ~= seconds else {
+            throw DateTimeErrors.InvalidTime(message: "Invalid second: \(seconds)")
+        }
+
+        guard 0...999_999_999 ~= nanos else {
+            throw DateTimeErrors.InvalidTime(message: "Invalid nanos: \(nanos)")
+        }
     }
 }

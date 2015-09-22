@@ -42,7 +42,8 @@ extension ZonedInstant : DateTimeConvertible {
     /// Get the date time representation of this object
     public func toDateTime() -> DateTime {
 
-        let time = instant.seconds + zone.offsetAt(instant).count
+        let offset = zone.offsetAt(instant).count
+        let time = instant.seconds + offset
 
         let (year, month, date) = chronology.fromEpoch(time)
         let secondsOfDay = time % 86_400
@@ -50,10 +51,10 @@ extension ZonedInstant : DateTimeConvertible {
         let minute = Int8((secondsOfDay % 3_600) / 60)
         let seconds = Int8(secondsOfDay % 60)
 
-        return try! DateTime(
-            year: year, month: month, date: date,
-            hours: hour, minutes: minute, seconds: seconds,
-            nanos: Int32(instant.nanos),
-            zone: zone)
+        return DateTime(
+            year, month, date,
+            hour, minute, seconds, Int32(instant.nanos),
+            Int32(offset), zone
+        )
     }
 }
