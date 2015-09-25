@@ -20,6 +20,18 @@ class InstantTests: XCTestCase {
         print(d)
     }
 
+    func testAdd() {
+        var time = Instant.now()
+
+        self.measureBlock {
+            for _ in 0..<10_000_000 {
+                time = time + 1.seconds
+            }
+        }
+
+        print(time)
+    }
+
     func testToDateTimeUTC() {
         let z = UTC.instance
         let i = Instant(seconds: 1442948012, zone: z)
