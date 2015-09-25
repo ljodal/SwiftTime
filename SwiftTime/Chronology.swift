@@ -34,7 +34,7 @@ internal protocol Chronology {
         _ hours: Int8, _ minutes: Int8, _ seconds: Int8, _ nanos: Int32) throws;
 }
 
-internal class ISOChronology : Chronology {
+internal final class ISOChronology : Chronology {
 
     // Look-up tables for days in months
     private let minDaysInMonth: [Int8] = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -46,6 +46,9 @@ internal class ISOChronology : Chronology {
 
     internal static let instance = ISOChronology()
 
+    /// Private constructor to ensure that the class cannot
+    /// be instanciated outside of the class. As all methods
+    /// are stateless, it is safe to reuse the same instace.
     private init() {}
 
     ///

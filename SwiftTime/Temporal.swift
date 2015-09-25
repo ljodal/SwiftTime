@@ -12,53 +12,13 @@ public protocol Temporal {
     /// Get the number of milli seconds since the UNIX epoch
     ///
     func toMillis() -> Int64
-}
 
-public protocol TemporalMath : Equatable {
+    /// Add the amount to this temporal
+    func + (lhs: Self, rhs: TemporalAmount) -> Self
 
-    //
-    // Addition and subtraction
-    //
+    /// Subtract the amount from this temporal
+    func - (lhs: Self, rhs: TemporalAmount) -> Self
 
-    func add<T : SecondType> (amount: T) -> Self
-    func add<T : NanoSecondType> (amount: T) -> Self
-    func add(amount: Duration) -> Self
-    func add(amount: Period) -> Self
-
-    func subtract<T : SecondType>(amount: T) -> Self
-    func subtract<T : NanoSecondType>(amount: T) -> Self
-    func subtract(amount: Duration) -> Self
-    func subtract(amount: Period) -> Self
-}
-
-public func +<T : TemporalMath, U : SecondType> (lhs: T, rhs: U) -> T {
-    return lhs.add(rhs)
-}
-
-public func +<T : TemporalMath, U : NanoSecondType> (lhs: T, rhs: U) -> T {
-    return lhs.add(rhs)
-}
-
-public func +<T : TemporalMath> (lhs: T, rhs: Duration) -> T {
-    return lhs.add(rhs)
-}
-
-public func +<T : TemporalMath> (lhs: T, rhs: Period) -> T {
-    return lhs.add(rhs)
-}
-
-public func -<T : TemporalMath, U : SecondType> (lhs: T, rhs: U) -> T {
-    return lhs.subtract(rhs)
-}
-
-public func -<T : TemporalMath, U : NanoSecondType> (lhs: T, rhs: U) -> T {
-    return lhs.subtract(rhs)
-}
-
-public func -<T : TemporalMath> (lhs: T, rhs: Duration) -> T {
-    return lhs.subtract(rhs)
-}
-
-public func -<T : TemporalMath> (lhs: T, rhs: Period) -> T {
-    return lhs.subtract(rhs)
+    /// Get the difference between two temporals
+    func - <T : Temporal>(lhs: Self, rhs: T) -> TemporalAmount
 }

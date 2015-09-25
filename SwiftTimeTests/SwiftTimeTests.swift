@@ -55,10 +55,10 @@ class SwiftTimeTests: XCTestCase {
     func testAdd2() {
         let h1 = 1.hours + 30.minutes
 
-        XCTAssertEqual(h1, 5400.seconds)
-        XCTAssertNotEqual(h1, 5432.seconds)
+        XCTAssertTrue(h1 == 5400.seconds)
     }
 
+    /*
     func testLocalDate1() {
         let d1 = try! LocalDate(year: 2015, month: 1, day: 31)
         let d2 = d1 + 1.months
@@ -296,4 +296,5 @@ class SwiftTimeTests: XCTestCase {
         XCTAssertEqual(range.first!, d1)
         XCTAssertTrue(range.contains(d2))
     }
+    */
 }

@@ -109,85 +109,12 @@ public struct LocalDate : ForwardIndexType, Comparable {
     }
 
     //
-    // MARK: Arithmithic
-    //
-
-
-    ///
-    /// Subtract the given amount of months from this date
-    ///
-    public func subtract(d: MonthType) -> LocalDate {
-        return add(Months(-d.months))
-    }
-
-    ///
-    /// Add the given number of months to this date.
-    ///
-    /// - Note: If the current day does not exist in the resulting month,
-    ///         the last day of the resulting month is used
-    ///
-    public func add(m: MonthType) -> LocalDate {
-        var months = Int64(self.month) + m.months
-        let addYears = (months / 12)
-        var years = self.year + addYears
-        months -= addYears * 12
-
-        // If we end up in negative month, we are actually in the previous year
-        if months < 1 {
-            years -= 1
-            months = 12 + months
-        }
-
-        // If the day is larger than the last day of the month, we snap
-        // to the last day of the month
-        var day = self.day
-        let last = chronology.daysInMonth(month: Int8(months), year: years)
-        if day > last {
-            day = last
-        }
-
-        return LocalDate(years, Int8(months), day)
-    }
-
-    ///
-    /// Subtract the given amount of days from this date
-    ///
-    public func subtract(d: DayType) -> LocalDate {
-        return add(Days(-d.days))
-    }
-
-    ///
-    /// Add the given amount of days to this date
-    ///
-    public func add(d: DayType) -> LocalDate {
-        // Get the ordinal day or the year, and add the given number of days
-        // to that.
-        var day = chronology.ordinalDay(year: self.year, month: month, day: self.day)
-        day += d.days
-
-        // Convert ordnial date to year, month, and day. Chronology handles
-        // any number of days and will always return a valid date.
-        let (y, m, d) = chronology.ordinalDay(year: self.year, days: day)
-
-        // Return a LocaDate. This is guaranteed to not fail, as the values
-        // returned from the method above will always be valid
-        return LocalDate(y, m, d)
-    }
-
-    public func add(p: Period) -> LocalDate {
-        return self + p.years + p.months + p.days
-    }
-
-    public func subtract(p: Period) -> LocalDate {
-        return self - p.years - p.months - p.days
-    }
-
-    //
     // MARK: ForwardIndexType implementation
     //
 
     public func successor() -> LocalDate {
-        return self + 1.days
+        //return self + 1.days
+        fatalError("Not implemented")
     }
 }
 
@@ -201,34 +128,6 @@ public func == (lhs: LocalDate, rhs: LocalDate) -> Bool {
 
 public func <(lhs: LocalDate, rhs: LocalDate) -> Bool {
     return lhs.toUnixTime() < rhs.toUnixTime()
-}
-
-//
-// MARK: Aritmethric Operators
-//
-
-public func + (lhs: LocalDate, rhs: MonthType) -> LocalDate {
-    return lhs.add(rhs)
-}
-
-public func + (lhs: LocalDate, rhs: DayType) -> LocalDate {
-    return lhs.add(rhs)
-}
-
-public func + (lhs: LocalDate, rhs: Period) -> LocalDate {
-    return lhs.add(rhs)
-}
-
-public func - (lhs: LocalDate, rhs: MonthType) -> LocalDate {
-    return lhs.subtract(rhs)
-}
-
-public func - (lhs: LocalDate, rhs: DayType) -> LocalDate {
-    return lhs.subtract(rhs)
-}
-
-public func - (lhs: LocalDate, rhs: Period) -> LocalDate {
-    return lhs.subtract(rhs)
 }
 
 //

@@ -58,3 +58,16 @@ extension ZonedInstant : DateTimeConvertible {
         )
     }
 }
+
+
+public func + <T : Temporal> (lhs: ZonedInstant, rhs: TemporalAmount) -> T {
+    fatalError("Not implemented")
+}
+
+public func - <T : Temporal> (lhs: ZonedInstant, rhs: TemporalAmount) -> T {
+    fatalError("Not implemented")
+}
+
+public func - <T : Temporal> (lhs: ZonedInstant, rhs: T) -> TemporalAmount {
+    fatalError("Not implemented")
+}

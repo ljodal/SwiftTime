@@ -13,7 +13,7 @@
 		16381BDA1B2F67C300882BEF /* SwiftTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BD91B2F67C300882BEF /* SwiftTimeTests.swift */; };
 		16381BED1B2F681900882BEF /* Instant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE41B2F681900882BEF /* Instant.swift */; };
 		16381BEE1B2F681900882BEF /* Temporal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE51B2F681900882BEF /* Temporal.swift */; };
-		16381BEF1B2F681900882BEF /* Amounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE61B2F681900882BEF /* Amounts.swift */; };
+		16381BEF1B2F681900882BEF /* TemporalAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE61B2F681900882BEF /* TemporalAmount.swift */; };
 		16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */; };
 		16381BF11B2F681900882BEF /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE81B2F681900882BEF /* Units.swift */; };
 		16381BF21B2F681900882BEF /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16381BE91B2F681900882BEF /* Errors.swift */; };
@@ -25,6 +25,8 @@
 		164E113D1B375D9F0000FD07 /* LocalTimeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164E113C1B375D9F0000FD07 /* LocalTimeTest.swift */; };
 		16A28B581B3C824F00C62664 /* LocalDateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A28B571B3C824F00C62664 /* LocalDateTest.swift */; };
 		16B1C8F01BB1D99A003670B8 /* ZonedInstantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B1C8EF1BB1D99A003670B8 /* ZonedInstantTests.swift */; settings = {ASSET_TAGS = (); }; };
+		16B1C8F31BB5BBE8003670B8 /* Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B1C8F21BB5BBE8003670B8 /* Duration.swift */; settings = {ASSET_TAGS = (); }; };
+		16B1C8F51BB5BE0B003670B8 /* CountableAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B1C8F41BB5BE0B003670B8 /* CountableAmount.swift */; settings = {ASSET_TAGS = (); }; };
 		16F0B7A41BAD7F1800FF48BE /* PrecalculatedZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0B7A31BAD7F1800FF48BE /* PrecalculatedZone.swift */; settings = {ASSET_TAGS = (); }; };
 		16F0B7A61BAEF21500FF48BE /* ZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0B7A51BAEF21500FF48BE /* ZoneTests.swift */; settings = {ASSET_TAGS = (); }; };
 		16F7C0271BB09329004429A9 /* InstantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F7C0261BB09329004429A9 /* InstantTests.swift */; settings = {ASSET_TAGS = (); }; };
@@ -52,7 +54,7 @@
 		16381BDB1B2F67C300882BEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16381BE41B2F681900882BEF /* Instant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instant.swift; sourceTree = "<group>"; };
 		16381BE51B2F681900882BEF /* Temporal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temporal.swift; sourceTree = "<group>"; };
-		16381BE61B2F681900882BEF /* Amounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Amounts.swift; sourceTree = "<group>"; };
+		16381BE61B2F681900882BEF /* TemporalAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalAmount.swift; sourceTree = "<group>"; };
 		16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericTimeExtensions.swift; sourceTree = "<group>"; };
 		16381BE81B2F681900882BEF /* Units.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Units.swift; sourceTree = "<group>"; };
 		16381BE91B2F681900882BEF /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -64,6 +66,8 @@
 		164E113C1B375D9F0000FD07 /* LocalTimeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTimeTest.swift; sourceTree = "<group>"; };
 		16A28B571B3C824F00C62664 /* LocalDateTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDateTest.swift; sourceTree = "<group>"; };
 		16B1C8EF1BB1D99A003670B8 /* ZonedInstantTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZonedInstantTests.swift; sourceTree = "<group>"; };
+		16B1C8F21BB5BBE8003670B8 /* Duration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Duration.swift; sourceTree = "<group>"; };
+		16B1C8F41BB5BE0B003670B8 /* CountableAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountableAmount.swift; sourceTree = "<group>"; };
 		16F0B7A31BAD7F1800FF48BE /* PrecalculatedZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecalculatedZone.swift; sourceTree = "<group>"; };
 		16F0B7A51BAEF21500FF48BE /* ZoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoneTests.swift; sourceTree = "<group>"; };
 		16F7C0261BB09329004429A9 /* InstantTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantTests.swift; sourceTree = "<group>"; };
@@ -121,15 +125,14 @@
 		16381BCC1B2F67C300882BEF /* SwiftTime */ = {
 			isa = PBXGroup;
 			children = (
+				16B1C8F11BB5BBD6003670B8 /* Amount */,
 				161CCE621B38A8D100659D74 /* TZ */,
 				16381BCD1B2F67C300882BEF /* SwiftTime.h */,
 				16381BCF1B2F67C300882BEF /* Info.plist */,
 				16381BE51B2F681900882BEF /* Temporal.swift */,
 				16381BE41B2F681900882BEF /* Instant.swift */,
 				16381BEB1B2F681900882BEF /* DateTime.swift */,
-				16381BE61B2F681900882BEF /* Amounts.swift */,
 				16381BE71B2F681900882BEF /* NumericTimeExtensions.swift */,
-				16381BE81B2F681900882BEF /* Units.swift */,
 				16381BE91B2F681900882BEF /* Errors.swift */,
 				16381BF71B34A48500882BEF /* Chronology.swift */,
 				16381BF91B34AB3A00882BEF /* LocalDate.swift */,
@@ -152,6 +155,17 @@
 				16B1C8EF1BB1D99A003670B8 /* ZonedInstantTests.swift */,
 			);
 			path = SwiftTimeTests;
+			sourceTree = "<group>";
+		};
+		16B1C8F11BB5BBD6003670B8 /* Amount */ = {
+			isa = PBXGroup;
+			children = (
+				16381BE61B2F681900882BEF /* TemporalAmount.swift */,
+				16B1C8F21BB5BBE8003670B8 /* Duration.swift */,
+				16381BE81B2F681900882BEF /* Units.swift */,
+				16B1C8F41BB5BE0B003670B8 /* CountableAmount.swift */,
+			);
+			name = Amount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,10 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16B1C8F31BB5BBE8003670B8 /* Duration.swift in Sources */,
+				16B1C8F51BB5BE0B003670B8 /* CountableAmount.swift in Sources */,
 				164E113B1B3758BC0000FD07 /* LocalTime.swift in Sources */,
 				16381BF01B2F681900882BEF /* NumericTimeExtensions.swift in Sources */,
 				16381BED1B2F681900882BEF /* Instant.swift in Sources */,
-				16381BEF1B2F681900882BEF /* Amounts.swift in Sources */,
+				16381BEF1B2F681900882BEF /* TemporalAmount.swift in Sources */,
 				16381BF11B2F681900882BEF /* Units.swift in Sources */,
 				16381BF51B2F681900882BEF /* Zone.swift in Sources */,
 				16381BF21B2F681900882BEF /* Errors.swift in Sources */,

@@ -15,7 +15,7 @@ private let microsPerNano: Int32 = 1_000
  * A struct that stores the number of nano seconds since
  * Unix Epoch (1970-01-01)
  */
-public struct Instant : Temporal, TemporalMath {
+public struct Instant : Temporal {
     public var seconds: Int64
     public var nanos: Int32
     
@@ -62,66 +62,6 @@ public struct Instant : Temporal, TemporalMath {
     }
 
     //
-    // MARK: Add
-    //
-
-    public func add(amount: Duration) -> Instant {
-        var new = self
-        new.seconds += amount.seconds.count
-        new.nanos += Int32(amount.nanoSeconds.count)
-        Instant.normalize(&new)
-        return new
-    }
-
-    // TODO: Implement
-    public func add(amount: Period) -> Instant {
-        fatalError("Method not implemented yet")
-    }
-
-    public func add<T : NanoSecondType>(amount: T) -> Instant {
-        var new = self
-        new.nanos += Int32(amount.nanoSeconds.nanoSeconds.count)
-        Instant.normalize(&new)
-        return new
-    }
-
-    public func add<T : SecondType>(amount: T) -> Instant {
-        var new = self
-        new.seconds += amount.seconds.seconds.count
-        return new
-    }
-
-    //
-    // MARK: Subtract
-    //
-
-    public func subtract(amount: Duration) -> Instant {
-        var new = self
-        new.seconds -= amount.seconds.seconds
-        new.nanos -= Int32(amount.nanoSeconds.nanoSeconds)
-        Instant.normalize(&new)
-        return new
-    }
-
-    // TODO: Implement
-    public func subtract(amount: Period) -> Instant {
-        fatalError("Method not implemented yet")
-    }
-
-    public func subtract<T : NanoSecondType>(amount: T) -> Instant {
-        var new = self
-        new.nanos -= Int32(amount.nanoSeconds)
-        Instant.normalize(&new)
-        return new
-    }
-
-    public func subtract<T : SecondType>(amount: T) -> Instant {
-        var new = self
-        new.seconds -= amount.seconds
-        return new
-    }
-
-    //
     // Convert
     //
 
@@ -148,7 +88,29 @@ public struct Instant : Temporal, TemporalMath {
     }
 }
 
+extension Instant : Equatable {
+}
+
 
 public func == (lhs: Instant, rhs: Instant) -> Bool {
     return lhs.seconds == rhs.seconds && lhs.nanos == rhs.nanos
+}
+
+public func + (lhs: Instant, rhs: TemporalAmount) -> Instant {
+
+    let (m, d, s, n) = rhs.components()
+
+    if m == 0 && d == 0 {
+        return Instant(seconds: lhs.seconds + s, nanos: lhs.nanos + n)
+    } else {
+        fatalError("Not implemented")
+    }
+}
+
+public func - (lhs: Instant, rhs: TemporalAmount) -> Instant {
+    fatalError("Not implemented")
+}
+
+public func - <T : Temporal> (lhs: Instant, rhs: T) -> TemporalAmount {
+    fatalError("Not implemented")
 }

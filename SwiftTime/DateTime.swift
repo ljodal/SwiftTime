@@ -104,53 +104,6 @@ extension DateTime : DateTimeConvertible {
     }
 }
 
-extension DateTime : TemporalMath {
-
-    //
-    // MARK: Arithmic
-    //
-
-    public func add<T : NanoSecondType>(amount: T) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func add<T : SecondType>(amount: T) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func add(amount: Duration) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func add(amount: Period) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func subtract<T : NanoSecondType>(amount: T) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func subtract<T : SecondType>(amount: T) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func subtract(amount: Duration) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-
-    public func subtract(amount: Period) -> DateTime {
-        // TODO: Implement
-        fatalError("Method not implemented")
-    }
-}
-
 public func == (lhs: DateTime, rhs: DateTime) -> Bool {
     return (
         lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day &&
@@ -164,4 +117,17 @@ extension DateTime : CustomDebugStringConvertible {
         return String(format: "%04d-%02d-%02dT%02d:%02d:%02d.%09d",
             year, month, day, hours, minutes, seconds, nanoSeconds)
     }
+}
+
+
+public func + <T : Temporal> (lhs: DateTime, rhs: TemporalAmount) -> T {
+    fatalError("Not implemented")
+}
+
+public func - <T : Temporal> (lhs: DateTime, rhs: TemporalAmount) -> T {
+    fatalError("Not implemented")
+}
+
+public func - <T : Temporal> (lhs: DateTime, rhs: T) -> TemporalAmount {
+    fatalError("Not implemented")
 }
