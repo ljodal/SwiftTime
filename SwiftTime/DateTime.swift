@@ -12,7 +12,7 @@ public protocol DateTimeConvertible {
     func toDateTime() -> DateTime
 }
 
-public struct DateTime : Temporal {
+public struct DateTime : Temporal, Equatable {
 
     //
     // MARK: Instance variables
